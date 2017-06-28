@@ -164,8 +164,11 @@ if( htmlflag==1 )
         end
     end
 
-    system('mv *.html html');
-
+    if isunix
+        system('mv *.html html');
+    elseif ispc
+        system('move *.html html');
+    end
 
     %% Alphabetical list
 
@@ -190,7 +193,13 @@ if( htmlflag==1 )
     end
     fprintf(f,'</table></p>\n');
     fclose(f);
-    system('mv alphabetical.html html');
+    
+    if isunix
+        system('mv alphabetical.html html');
+    elseif ispc
+        system('move alphabetical.html html');
+    end
+
 
 end
 %% Prepare the demo html files
