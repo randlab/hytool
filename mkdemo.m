@@ -47,8 +47,14 @@ fclose(fid);
 fclose(fo);
 
 % Rename the temporary file to replace the original one
-tcmo=sprintf('mv tmp.html %s.html',name);
-system(tcmo);
+
+    if isunix
+        tcmo=sprintf('mv tmp.html %s.html',name);
+        system(tcmo);
+    elseif ispc
+        tcmo=sprintf('move tmp.html %s.html',name);
+        system(tcmo);
+    end
 
 % Show the results
 %web(htmlfilename)
