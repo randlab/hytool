@@ -1,0 +1,380 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Theis solution with a constant head boundary for Multiple rate tests</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="tmc_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Theis solution with a constant head boundary for Multiple rate tests</h1><!--introduction--><p>This demonstrates the interpretation of the drawdown at time t for multiple rate tests with accounting for a constant head boundary with the Theis (1935) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example is synthetic. It has been created with by using the function tmr_dim plus a random noise, and saved in a file. s = tmc_dim([1e2,20,300],t)+rand(80,1)*0.02-0.01;</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'tmc_ds1.dat'</span>);
+</pre><p>We then define the values of the parameters that are required for the interpretation:</p><p>The piezometer is located at 20m from the pumping well. Three rate tests [t(min);q(m3/d)]:[30,500;80,100;130,800];</p><pre class="codeinput">q=[30*60,500/24/60/60;80*60,100/24/60/60;130*60,800/24/60/60];
+tmc_pre(q);
+</pre><p>Once the data have been loaded and the parameter defined, we can interpret the data. We do that as usually in two steps. First the parameters p of the model are estimated with the function tmc_gss. Then we an optimum fit.</p><pre class="codeinput">p=tmc_gss(t,s);
+p=fit(<span class="string">'tmc'</span>,p,t,s);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0      0.00055962
+           1     0.000383732        0.117726         273.106
+           2     0.000305486       0.0358224         105.502
+           3     0.000257298        0.116012         218.889
+           4     0.000233915       0.0046794         43.5085
+           5     0.000233873     0.000377713        0.126877
+           6     0.000233868     0.000270971         1.80544
+           7     0.000233864     0.000271112         1.82534
+           8      0.00023386     0.000271561         1.82786
+           9     0.000233856     0.000272008          1.8302
+          10     0.000233852     0.000272446         1.83253
+          11     0.000233848     0.000272875         1.83483
+          12     0.000233844     0.000273295          1.8371
+          13      0.00023384     0.000273705         1.83935
+          14     0.000233836     0.000274108         1.84158
+          15     0.000233832     0.000274502         1.84378
+          16     0.000233828     0.000274886         1.84596
+          17     0.000233824      0.00027526          1.8481
+          18      0.00023382     0.000275626         1.85023
+          19     0.000233816     0.000275983         1.85233
+          20     0.000233812      0.00027633          1.8544
+          21     0.000233808     0.000276668         1.85645
+          22     0.000233804     0.000276997         1.85847
+          23       0.0002338     0.000277314         1.86046
+          24     0.000233796     0.000277624         1.86242
+          25     0.000233792     0.000277921         1.86436
+          26     0.000233788     0.000278212         1.86627
+          27     0.000233784      0.00027849         1.86815
+          28      0.00023378      0.00027876            1.87
+          29     0.000233777      0.00027902         1.87182
+          30     0.000233773     0.000279271         1.87362
+          31     0.000233769     0.000279511         1.87539
+          32     0.000233765     0.000279741         1.87713
+          33     0.000233761     0.000279961         1.87884
+          34     0.000233757     0.000280169         1.88051
+          35     0.000233754     0.000280369         1.88216
+          36      0.00023375     0.000280558         1.88378
+          37     0.000233746     0.000280738         1.88537
+          38     0.000233742     0.000280905         1.88693
+          39     0.000233739     0.000281063         1.88845
+          40     0.000233735     0.000281211         1.88995
+          41     0.000233731     0.000281349         1.89142
+          42     0.000233727     0.000281476         1.89285
+          43     0.000233724     0.000281591         1.89425
+          44      0.00023372     0.000281696         1.89561
+          45     0.000233716     0.000281792         1.89695
+          46     0.000233713     0.000281875         1.89826
+          47     0.000233709     0.000281949         1.89953
+          48     0.000233705     0.000282011         1.90076
+          49     0.000233702     0.000282062         1.90197
+          50     0.000233698     0.000282104         1.90314
+          51     0.000233695     0.000282133         1.90427
+          52     0.000233691     0.000282154         1.90538
+          53     0.000233688     0.000282162         1.90645
+          54     0.000233684     0.000282159         1.90748
+          55     0.000233681     0.000282146         1.90848
+          56     0.000233677     0.000282122         1.90945
+          57     0.000233673     0.000282086         1.91037
+          58      0.00023367      0.00028204         1.91127
+          59     0.000233667     0.000281983         1.91213
+          60     0.000233663     0.000281916         1.91295
+          61      0.00023366     0.000281835         1.91374
+          62     0.000233656     0.000281746         1.91449
+          63     0.000233653     0.000281644          1.9152
+          64     0.000233649     0.000281531         1.91588
+          65     0.000233646     0.000281409         1.91653
+          66     0.000233643     0.000281274         1.91713
+          67     0.000233639      0.00028113          1.9177
+          68     0.000233636     0.000280972         1.91823
+          69     0.000233633     0.000280806         1.91873
+          70     0.000233629     0.000280627         1.91918
+          71     0.000233626     0.000280438          1.9196
+          72     0.000233623     0.000280237         1.91998
+          73     0.000233619     0.000280026         1.92032
+          74     0.000233616     0.000279804         1.92063
+          75     0.000233613     0.000279569         1.92089
+          76      0.00023361     0.000279327         1.92112
+          77     0.000233607     0.000279072         1.92131
+          78     0.000233603     0.000278802         1.92145
+          79       0.0002336     0.000278527         1.92157
+          80     0.000233597     0.000278238         1.92164
+          81     0.000233594     0.000277937         1.92166
+          82     0.000233591     0.000277628         1.92166
+          83     0.000233588     0.000277308         1.92161
+          84     0.000233584     0.000276976         1.92152
+          85     0.000233581     0.000276633         1.92139
+          86     0.000233578     0.000276281         1.92122
+          87     0.000233575     0.000275916         1.92101
+          88     0.000233572     0.000275541         1.92076
+          89     0.000233569     0.000275156         1.92047
+          90     0.000233566      0.00027476         1.92014
+          91     0.000233563     0.000274353         1.91977
+          92      0.00023356     0.000273939         1.91937
+          93     0.000233557      0.00027351         1.91891
+          94     0.000233554     0.000273072         1.91842
+          95     0.000233551     0.000272622         1.91788
+          96     0.000233548     0.000272162          1.9173
+          97     0.000233545     0.000271694         1.91668
+          98     0.000233543     0.000271215         1.91602
+          99      0.00023354     0.000270725         1.91532
+         100     0.000233537     0.000270226         1.91458
+         101     0.000233534     0.000269715         1.91379
+         102     0.000233531     0.000269196         1.91297
+         103     0.000233528     0.000268663         1.91209
+         104     0.000233526     0.000268123         1.91118
+         105     0.000233523     0.000267575         1.91024
+         106      0.00023352     0.000267014         1.90924
+         107     0.000233517     0.000266445          1.9082
+         108     0.000233515     0.000265864         1.90712
+         109     0.000233512     0.000265274         1.90599
+         110     0.000233509     0.000264677         1.90483
+         111     0.000233506     0.000264069         1.90363
+         112     0.000233504     0.000263452         1.90238
+         113     0.000233501     0.000262824         1.90109
+         114     0.000233499     0.000262188         1.89976
+         115     0.000233496     0.000261542         1.89838
+         116     0.000233493     0.000260886         1.89696
+         117     0.000233491     0.000260224          1.8955
+         118     0.000233488     0.000259549         1.89399
+         119     0.000233486      0.00025887         1.89245
+         120     0.000233483     0.000258178         1.89086
+         121      0.00023348     0.000257479         1.88923
+         122     0.000233478      0.00025677         1.88755
+         123     0.000233475     0.000256053         1.88584
+         124     0.000233473     0.000255328         1.88408
+         125     0.000233471     0.000254594         1.88228
+         126     0.000233468     0.000253851         1.88043
+         127     0.000233466     0.000253102         1.87855
+         128     0.000233463     0.000252343         1.87662
+         129     0.000233461     0.000251577         1.87465
+         130     0.000233458     0.000250802         1.87264
+         131     0.000233456     0.000250016         1.87057
+         132     0.000233454     0.000249227         1.86848
+         133     0.000233451     0.000248429         1.86634
+         134     0.000233449     0.000247622         1.86416
+         135     0.000233447      0.00024681         1.86194
+         136     0.000233444     0.000245986         1.85966
+         137     0.000233442     0.000245157         1.85735
+         138      0.00023344     0.000244324         1.85501
+         139     0.000233438     0.000243481         1.85262
+         140     0.000233435     0.000242629         1.85018
+         141     0.000233433     0.000241771         1.84771
+         142     0.000233431     0.000240908         1.84519
+         143     0.000233429     0.000240038         1.84264
+         144     0.000233427      0.00023916         1.84004
+         145     0.000233425     0.000238276          1.8374
+         146     0.000233422     0.000237386         1.83472
+         147      0.00023342     0.000236487           1.832
+         148     0.000233418     0.000235585         1.82924
+         149     0.000233416     0.000234674         1.82644
+         150     0.000233414     0.000233759         1.82359
+         151     0.000233412     0.000232838         1.82072
+         152      0.00023341     0.000231909         1.81779
+         153     0.000233408     0.000230977         1.81483
+         154     0.000233406     0.000230038         1.81183
+         155     0.000233404     0.000229094         1.80879
+         156     0.000233402     0.000228144         1.80571
+         157       0.0002334     0.000227187         1.80258
+         158     0.000233398     0.000226226         1.79942
+         159     0.000233396     0.000225261         1.79623
+         160     0.000233394     0.000224289         1.79299
+         161     0.000233392     0.000223314         1.78971
+         162      0.00023339      0.00022233         1.78639
+         163     0.000233388     0.000221346         1.78304
+         164     0.000233387     0.000220356         1.77965
+         165     0.000233385     0.000219362         1.77623
+         166     0.000233383     0.000218362         1.77276
+         167     0.000233381     0.000217358         1.76925
+         168     0.000233379     0.000216351         1.76571
+         169     0.000233377     0.000215338         1.76214
+         170     0.000233376     0.000214323         1.75852
+         171     0.000233374     0.000213304         1.75488
+         172     0.000233372     0.000212278         1.75118
+         173      0.00023337     0.000211251         1.74746
+         174     0.000233369      0.00021022          1.7437
+         175     0.000233367     0.000209187         1.73991
+         176     0.000233365     0.000208148         1.73608
+         177     0.000233364     0.000207107         1.73221
+         178     0.000233362     0.000206063         1.72832
+         179      0.00023336     0.000205015         1.72438
+         180     0.000233359     0.000203966         1.72042
+         181     0.000233357     0.000202912         1.71641
+         182     0.000233355     0.000201855         1.71238
+         183     0.000233354     0.000200797         1.70831
+         184     0.000233352     0.000199736         1.70421
+         185     0.000233351     0.000198673         1.70007
+         186     0.000233349     0.000197606          1.6959
+         187     0.000233348     0.000196539         1.69171
+         188     0.000233346     0.000195467         1.68747
+         189     0.000233344     0.000194397         1.68322
+         190     0.000233343     0.000193323         1.67893
+         191     0.000233341     0.000192247          1.6746
+         192      0.00023334      0.00019117         1.67024
+         193     0.000233339     0.000190089         1.66585
+         194     0.000233337     0.000189008         1.66144
+         195     0.000233336     0.000187926         1.65699
+         196     0.000233334     0.000186841         1.65251
+         197     0.000233333     0.000185758         1.64801
+         198     0.000233331     0.000184671         1.64347
+         199      0.00023333     0.000183585         1.63892
+         200     0.000233329     0.000182496         1.63432
+Warning: Iteration limit exceeded.  Returning results from final iteration. 
+ 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0        0.209702
+           1         0.19423         10.1961         1278.89
+           2        0.171497         4.50297         847.635
+           3        0.148759          2.1783         100.198
+           4       0.0917328        0.694126         358.004
+           5       0.0646575        0.295577         147.148
+           6       0.0431167        0.101244         160.075
+           7       0.0313939        0.040928         107.368
+           8       0.0238052       0.0152181         86.0834
+           9       0.0187516      0.00588894         65.9028
+          10       0.0151843      0.00228138         51.8337
+          11        0.012586      0.00111761          41.273
+          12       0.0106501     0.000868309         33.3887
+          13      0.00918025     0.000791484         27.4177
+          14      0.00804543     0.000713504          22.833
+          15      0.00715564     0.000629032          19.261
+          16      0.00644807     0.000547766         16.4379
+          17      0.00587817     0.000474938         14.1757
+          18      0.00541381     0.000412036         12.3397
+          19      0.00503149     0.000358691         10.8317
+          20      0.00499654       0.0141913          61.896
+          21      0.00307854      0.00290924         21.5203
+          22      0.00281648      0.00166617         15.6718
+          23      0.00269961     0.000795034         10.1968
+          24      0.00264825     0.000399308         6.99123
+          25      0.00263876      0.00190088         14.7059
+          26      0.00259569     0.000159139         3.74333
+          27      0.00259538     2.74158e-07        0.139974
+          28      0.00259538     8.88669e-11      0.00209506
+Iterations terminated: relative change in SSE less than OPTIONS.TolFun
+</pre><p>We can then display the result of the interpretation. Hytool find that the folowing values fort the transmissivity and storativity:</p><p>T = 1.9 e-3 m2/s and S = 2.0 e-4</p><pre class="codeinput">tmc_rpt(p,t,s,20,<span class="string">'automatic fit'</span>)
+</pre><img vspace="5" hspace="5" src="tmc_dmo_01.png" alt=""> <p>The results are in reasonable agreement with the values found by this reference : T = 1.8 e-3 m2/s S = 2.1 e-4 ri = 77 m</p><p>We then find that the fits are rather similar and both acceptable.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Theis solution with a constant head boundary for Multiple rate tests 
+% This demonstrates the interpretation of the drawdown at time t for
+% multiple rate tests with accounting for a constant head boundary
+% with the Theis (1935) solution
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example is synthetic. It has been created with 
+% by using the function tmr_dim plus a random noise, and saved in a file.
+% s = tmc_dim([1e2,20,300],t)+rand(80,1)*0.02-0.01;
+%
+% Let us first load the data and plot them.
+
+[t,s]=ldf('tmc_ds1.dat');
+
+
+%% 
+% We then define the values of the parameters that are required for the
+% interpretation:
+%
+% The piezometer is located at 20m from the pumping well.
+% Three rate tests [t(min);q(m3/d)]:[30,500;80,100;130,800];
+
+q=[30*60,500/24/60/60;80*60,100/24/60/60;130*60,800/24/60/60];
+tmc_pre(q);
+
+%%
+% Once the data have been loaded and the parameter defined, we can
+% interpret the data. We do that as usually in two steps. First the
+% parameters p of the model are estimated with the function tmc_gss. Then
+% we an optimum fit.
+%
+
+p=tmc_gss(t,s);
+p=fit('tmc',p,t,s);
+
+%%
+% We can then display the result of the interpretation.
+% Hytool find that the folowing values fort the transmissivity and
+% storativity:
+%
+% T = 1.9 e-3 m2/s and S = 2.0 e-4
+%
+
+tmc_rpt(p,t,s,20,'automatic fit')
+
+%%
+% The results are in reasonable agreement with the values found by this
+% reference :
+% T = 1.8 e-3 m2/s
+% S = 2.1 e-4
+% ri = 77 m
+
+%%
+% We then find that the fits are rather similar and both acceptable. 
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>

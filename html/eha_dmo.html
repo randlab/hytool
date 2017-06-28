@@ -1,0 +1,153 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Eden Hazel interpretation.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="eha_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Eden Hazel interpretation.</h1><!--introduction--><p>This is a demonstration of the interpretation of Step-drawdown test with Eden and Hazel (1973) method</p><p>Copyright 1998-2007 - Philippe Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load the data</a></li><li><a href="#4">Model parameter identification and report</a></li></ul></div><h2 id="1">Load the data</h2><p>The data set for this example where taken from: Kruseman and de Ridder (1994) Analysis and evaluation of pumping test data, ILRI Publication No. 47, Table 14.1 page 204.</p><p>The original source of the data is: Clark, L. (1977) The analysis and planning of step-drawdown tests. Quarterly Journal of Engineering Geology and Hydrogeology 10(2):125-143</p><p>Let us load the data in the matlab workspace with the ldf function. We then plot the data to verify them graphicaly.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'eha_ds1.dat'</span>);
+clf
+plot(t,s,<span class="string">'o'</span>)
+xlabel(<span class="string">'Time in seconds'</span>)
+ylabel(<span class="string">'Drawdown in meters'</span>)
+title(<span class="string">'K data set'</span>)
+</pre><img vspace="5" hspace="5" src="eha_dmo_01.png" alt=""> <p>Hytool then needs to know the duration of the pumping steps and the values of the pumping rates for each pumping step. This information is described and stored in a matrix made of two columns and as many raws as pumping steps. The first columns contains the time at which the pumping stoped, the second the values of the pumping rates.</p><p>We need now to build this matrix and provide it to hytool.</p><pre class="codeinput">qp=[1306 1693 2423 3261 4094 5019]/86400; <span class="comment">% Vector of pumping rates in m3/s</span>
+tp=[10800 21600 32400 43200 54000 64800]; <span class="comment">% Final time of each steps in s</span>
+q=[tp',qp'];                              <span class="comment">% Build the required matrix</span>
+eha_pre(t,q);                             <span class="comment">% Initialize the eha model</span>
+</pre><h2 id="4">Model parameter identification and report</h2><p>We now fit the model and report the results as usual with hytool.</p><pre class="codeinput">p0=eha_gss(t,s);
+p=fit(<span class="string">'eha'</span>,p0,t,s);
+eha_rpt(p,t,s,<span class="string">'Theis interpretation of Kruseman and de Ridder data'</span>);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0         6.91711
+           1         5.43068        0.124306        0.333366
+           2         5.41415       0.0196484        0.878373
+           3         5.40762      0.00203492        0.908763
+           4         5.40755     2.32278e-05        0.103732
+           5         5.40755     2.67891e-08      0.00119634
+Iterations terminated: relative change in SSE less than OPTIONS.TolFun
+</pre><img vspace="5" hspace="5" src="eha_dmo_02.png" alt=""> <p>The estimated transmissivity is T = 2.5e-3 m2/s and the quadratic head losses coefficient is B = 980 s2/m5. These numbers compare well with the values estimated by Kruseman and de Ridder (1994):</p><p>T=3.1e-3 m2/d B=1.4e-7 d2/m5 = 1045 s2/m5</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Eden Hazel interpretation.  
+% This is a demonstration of the interpretation of Step-drawdown test with
+% Eden and Hazel (1973) method 
+%
+% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%% Load the data
+% The data set for this example where taken from: 
+% Kruseman and de Ridder (1994) Analysis and evaluation of pumping test
+% data, ILRI Publication No. 47, Table 14.1 page 204.
+% 
+% The original source of the data is:
+% Clark, L. (1977) The analysis and planning of step-drawdown tests. 
+% Quarterly Journal of Engineering Geology and Hydrogeology 10(2):125-143
+
+%%
+% Let us load the data in the matlab workspace with the ldf function.
+% We then plot the data to verify them graphicaly.
+
+[t,s]=ldf('eha_ds1.dat');
+clf
+plot(t,s,'o')
+xlabel('Time in seconds')
+ylabel('Drawdown in meters')
+title('K data set')
+
+%% 
+% Hytool then needs to know the duration of the pumping steps and the 
+% values of the pumping rates for each pumping step. This information
+% is described and stored in a matrix made of two columns and as many
+% raws as pumping steps. The first columns contains the time at which 
+% the pumping stoped, the second the values of the pumping rates. 
+%
+% We need now to build this matrix and provide it to hytool.
+
+qp=[1306 1693 2423 3261 4094 5019]/86400; % Vector of pumping rates in m3/s
+tp=[10800 21600 32400 43200 54000 64800]; % Final time of each steps in s
+q=[tp',qp'];                              % Build the required matrix 
+eha_pre(t,q);                             % Initialize the eha model
+
+
+%%  Model parameter identification and report
+%
+% We now fit the model and report the results as usual with hytool.
+
+p0=eha_gss(t,s);
+p=fit('eha',p0,t,s);
+eha_rpt(p,t,s,'Theis interpretation of Kruseman and de Ridder data');
+
+%%
+% The estimated transmissivity is T = 2.5e-3 m2/s and the quadratic head 
+% losses coefficient is B = 980 s2/m5. These numbers compare well with
+% the values estimated by Kruseman and de Ridder (1994):
+%
+% T=3.1e-3 m2/d
+% B=1.4e-7 d2/m5 = 1045 s2/m5
+
+##### SOURCE END #####
+--></body></html>

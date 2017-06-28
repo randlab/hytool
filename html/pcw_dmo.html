@@ -1,0 +1,159 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Drawdown in the well.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="pcw_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Drawdown in the well.</h1><!--introduction--><p>This demonstrates the interpretation of a Drawdown in the well with well-bore storage effect with Papadopulos and Cooper (1967) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example comes from the following reference: Rushton K.R. and Holt S.M., 1981, Estimating aquifer parameters for large-diameter well. Ground Water, 19(5): 505-509 Digitized from figure 3b page 508. The test is conducted in a well in a confined aquifer in south India.</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'pcw_ds1.dat'</span>);
+diagnostic(t,s);
+</pre><img vspace="5" hspace="5" src="pcw_dmo_01.png" alt=""> <p>We then define the values of the parameters that are required for the interpretation:</p><pre class="codeinput">Q=0.007997685185185;        <span class="comment">% Pumping rate in m3/s</span>
+rw=0.1078;                  <span class="comment">% Radius of well screen in m</span>
+rc=2.4;                     <span class="comment">% Radius of the casing in m</span>
+</pre><p>Once the data have been loaded and the parameter defined, we can interpret the data. We do that as usually in two steps. First we can estimate the parameter p with the function pcw_gss. Then we find an optimum fit.</p><pre class="codeinput">p0= pcw_gss(t,s);
+trial(<span class="string">'pcw'</span>,p0,t,s);
+p1=fit(<span class="string">'pcw'</span>,p0,t,s);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0       0.0483136
+           1      0.00838534       0.0259841          5.7774
+           2      0.00706771       0.0253783         4.17154
+           3      0.00619924       0.0265814         4.06539
+           4      0.00546013       0.0221701         3.96861
+           5      0.00483946       0.0180584         3.83604
+           6      0.00431985       0.0146188         3.68984
+           7      0.00388642       0.0117999         3.52607
+           8      0.00352621      0.00947066          3.3479
+           9      0.00322719      0.00754088         3.16725
+          10      0.00297943      0.00594262         2.98369
+          11       0.0027748      0.00467694         2.79552
+          12      0.00260578      0.00364595         2.61448
+          13      0.00246651      0.00278929         2.43424
+          14      0.00242073        0.116512         12.2388
+          15      0.00207181       0.0892705         12.2493
+          16      0.00183196      0.00119029         1.66044
+          17      0.00183191     8.50778e-06        0.131107
+          18      0.00183191     9.74167e-06     4.66008e-08
+Iterations terminated: relative norm of the current step is less than OPTIONS.TolX
+</pre><img vspace="5" hspace="5" src="pcw_dmo_02.png" alt=""> <p>We can then display the result of the interpretation. Hytool find that the folowing values fort the transmissivity :</p><p>T = 5.5 e-4 m2/s</p><pre class="codeinput">pcw_rpt(p1,t,s,[Q,rw,rc],<span class="string">'Rushton example - automatic fit'</span>)
+</pre><img vspace="5" hspace="5" src="pcw_dmo_03.png" alt=""> <p>The results are in reasonable agreement with the values found by Rushton K.R. and Holt S.M. : T = 2.77 e-4 to 3.36 e-4 m2/s</p><p>We then find that the fits are rather similar and both acceptable.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Drawdown in the well.
+% This demonstrates the interpretation of a Drawdown in the well 
+% with well-bore storage effect with Papadopulos and Cooper (1967) solution 
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example comes from the following reference:
+% Rushton K.R. and Holt S.M., 1981, Estimating aquifer parameters for 
+% large-diameter well. Ground Water, 19(5): 505-509
+% Digitized from figure 3b page 508.
+% The test is conducted in a well in a confined aquifer in south India.
+%
+% Let us first load the data and plot them.
+
+[t,s]=ldf('pcw_ds1.dat');
+diagnostic(t,s);
+
+%% 
+% We then define the values of the parameters that are required for the
+% interpretation:
+
+Q=0.007997685185185;        % Pumping rate in m3/s
+rw=0.1078;                  % Radius of well screen in m
+rc=2.4;                     % Radius of the casing in m
+
+%%
+% Once the data have been loaded and the parameter defined, we can
+% interpret the data. We do that as usually in two steps. First we can 
+% estimate the parameter p with the function pcw_gss. 
+% Then we find an optimum fit.
+%
+
+p0= pcw_gss(t,s);
+trial('pcw',p0,t,s);
+p1=fit('pcw',p0,t,s);
+
+%%
+% We can then display the result of the interpretation.
+% Hytool find that the folowing values fort the transmissivity :
+%
+% T = 5.5 e-4 m2/s
+%
+
+pcw_rpt(p1,t,s,[Q,rw,rc],'Rushton example - automatic fit')
+
+%%
+% The results are in reasonable agreement with the values found by
+% Rushton K.R. and Holt S.M. :
+% T = 2.77 e-4 to 3.36 e-4 m2/s
+                 
+%%
+% We then find that the fits are rather similar and both acceptable. 
+
+##### SOURCE END #####
+--></body></html>

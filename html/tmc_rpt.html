@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>tmc_rpt :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>tmc_rpt</h1>
+<p> Final graphical output with numerical results. </p>
+                 
+<h2>Syntax</h2>
+<pre>tmr_rpt( p, t, s, d, ttle )
+ 
+    p = parameters of the model
+    p(1) = b  = slope of the straight line ( = 0.183/T )
+    p(2) = t0 = intercept with the horizontal axis for s = 0
+    p(3) = ti = time of intersection between the 2 straight lines
+ 
+    t = measured time
+    s = measured drawdown
+    d(1) = r = distance from the pumping well 
+    ttle = Title of the figure 
+ 
+</pre>
+<h2>Description</h2>
+<pre> 
+    Produces the final figure and results for Theis model with a constant
+    head boundary for multiple rate tests (1935).
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="tmc_dmo.html">tmc_dmo</a>, <a href="tmc_dim.html">tmc_dim</a>, <a href="tmc_pre.html">tmc_pre</a>, <a href="tmc_gss.html">tmc_gss</a>
+    Published output in the Help browser
+       showdemo tmc_rpt
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

@@ -1,0 +1,144 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Constant head test</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="jlq_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Constant head test</h1><!--introduction--><p>This demonstrates the interpretation of discharge rate in the test well with the Jacob and Lohman (1952) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example comes from the following reference: Lohman (1965) Geology and artesian water supply of the Grand Junction area, Colorado: U.S. Geol. Survey Prof. Paper 451, 149p. Tables 6 and 7, well 28</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,q]=ldf(<span class="string">'jlq_ds1.dat'</span>);
+</pre><p>Once the data have been loaded , we can interpret the data. We do that as usually in two steps. First the parameters p of the model are estimated with the function jlq_gss. Then we find an optimum fit.</p><pre class="codeinput">p=jlq_gss(t,q);
+p=fit(<span class="string">'jlq'</span>,p,t,q);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0     1.34411e-08
+           1     1.29877e-09     1.61134e-06         31.8013
+           2     1.21176e-09     2.10348e-07         5.37394
+           3     1.17969e-09     2.11246e-06         8.88676
+           4      1.1431e-09     6.36578e-07         7.04204
+           5     1.13893e-09     5.68198e-08          2.8191
+           6     1.13844e-09     2.85929e-07         1.23623
+           7     1.13334e-09     8.87174e-07         4.13358
+           8     1.13316e-09     6.50143e-08        0.177843
+           9     1.13259e-09     2.89219e-07        0.156589
+          10     1.13256e-09     1.50885e-07      0.00755409
+          11     1.13256e-09     4.79555e-07     0.000829834
+          12     1.13255e-09      5.3297e-07       0.0007061
+          13     1.13255e-09     2.06608e-07      7.0563e-05
+          14     1.13255e-09       3.881e-08      7.0564e-05
+          15     1.13255e-09     3.04489e-07     0.000636286
+          16     1.13255e-09     6.99483e-07     6.37297e-07
+Iterations terminated: relative norm of the current step is less than OPTIONS.TolX
+</pre><p>We can then display the result of the interpretation. Hytool find that the folowing values fort the transmissivity and storativity:</p><p>T = 1.3 e-5 m2/s and S = 1.6 e-5</p><pre class="codeinput">jlq_rpt(p,t,q,[28.142,0.084],<span class="string">'Glover (1978) example - automatic fit'</span>)
+</pre><img vspace="5" hspace="5" src="jlq_dmo_01.png" alt=""> <p>The results are in reasonable agreement with the values found by this differents authors: Swamee et al (2000) : S = 3.88 e-5 and T = 1.16 e-5 m2/s Glover (1978)       : S = 4.14 e-5 and T = 1.18 e-5 m2/s Batu (1998)         : S = 1.58 e-4 and T = 9.3  e-6 m2/s</p><pre class="codeinput"><span class="comment">% Nota Bene: If required, one can use trial and error</span>
+<span class="comment">% trial('jlq',p,t,q)</span>
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Constant head test
+% This demonstrates the interpretation of discharge rate in the test well
+% with the Jacob and Lohman (1952) solution
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example comes from the following reference: 
+% Lohman (1965) Geology and artesian water supply of the Grand
+% Junction area, Colorado: U.S. Geol. Survey Prof. Paper 451, 149p. 
+% Tables 6 and 7, well 28
+%
+% Let us first load the data and plot them.
+
+[t,q]=ldf('jlq_ds1.dat');
+
+%%
+% Once the data have been loaded , we can interpret the data. We do that
+% as usually in two steps. First the parameters p of the model are 
+% estimated with the function jlq_gss. Then we find an optimum fit.
+
+p=jlq_gss(t,q);
+p=fit('jlq',p,t,q); 
+
+%%
+% We can then display the result of the interpretation.
+% Hytool find that the folowing values fort the transmissivity and
+% storativity:
+%
+% T = 1.3 e-5 m2/s and S = 1.6 e-5
+%
+
+jlq_rpt(p,t,q,[28.142,0.084],'Glover (1978) example - automatic fit')
+
+%%
+% The results are in reasonable agreement with the values found by this 
+% differents authors:  
+% Swamee et al (2000) : S = 3.88 e-5 and T = 1.16 e-5 m2/s
+% Glover (1978)       : S = 4.14 e-5 and T = 1.18 e-5 m2/s
+% Batu (1998)         : S = 1.58 e-4 and T = 9.3  e-6 m2/s
+
+
+% Nota Bene: If required, one can use trial and error
+% trial('jlq',p,t,q)
+##### SOURCE END #####
+--></body></html>

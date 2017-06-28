@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>hysampling :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>hysampling</h1>
+<p> Sample a signal at regular intervals.</p>
+       
+<h2>Syntax</h2>
+<pre>[xs,ys] = hysampling( x, y, nval [,idlog [,option]] )
+ 
+    x,y   = vectors containing the input signal
+    nval  = number of values of the output signal
+    xs,ys = sampled signal
+ 
+    OPTIONAL ARGUMENT
+ 
+    idlog : allows to select the type of spacing of the samples
+ 
+        idlog  = 'linear' = Default value = linear scale  
+        idlog  = 'log'    = logarithmic scale 
+ 
+    option : allows to define if the points must be interpolated  
+ 
+        option = 'sample' = Default value 
+                          = only points from the data set are taken
+        option = 'interp' = creates points by interpolation
+ 
+</pre>
+<h2>Description</h2>
+<pre> 
+    The hytool function hysampling samples a data set x,y at regular
+    intervals and displays the sampled data set as xs,ys. The input signal
+    is interpolated at a given number of points (nval) that are regularly 
+    spaced either in linear (idlog=’linear’) or in logartihmic (idlog=’log’)
+    scale. By option 'sample' (Default value) the data set is simply 
+    sampled, i.e. points from the data set are taken, sampled points are 
+    created by interpolation by the option = 'interp' in contrast.
+ 
+</pre>
+<h2>Example</h2>
+<pre>
+    [ts,hs] = hysampling(t,s,10) 
+    [ts,hs] = hysampling(t,s,30,'log')
+    [ts,hs] = hysampling(t,s,10,'linear','interp')
+    [ts,qs] = hysampling(tf,qf,30,'log','interp')
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="hyfilter.html">hyfilter</a>, <a href="hyplot.html">hyplot</a>, <a href="hyclean.html">hyclean</a>, <a href="hyselect.html">hyselect</a>
+    Published output in the Help browser
+       showdemo hysampling
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

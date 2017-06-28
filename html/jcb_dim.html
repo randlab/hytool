@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>jcb_dim :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>jcb_dim</h1>
+<p> Compute drawdwon with the Cooper and Jacob (1946) approximation </p>
+ 
+<h2>Syntax</h2>
+<pre>[s,d] = jcb_dim( p, t) 
+ 
+    p(1) = a = slope of Jacob Straight Line
+    p(2) = b = intercept with y=0
+ 
+    t    = time
+    s    = drawdown
+    d    = logarithmic derivative
+ 
+</pre>
+<h2>Description</h2>
+<pre>
+    Computes drawdown with the Cooper-Jacob (1946) late time approximation 
+    of the Theis (1935) solution. 
+ 
+</pre>
+<h2>Example</h2>
+<pre>
+    s=jcb_dim([1,5e-1],50)
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="jcb_dmo.html">jcb_dmo</a>, <a href="jcb_rpt.html">jcb_rpt</a>, <a href="jcb_gss.html">jcb_gss</a>, <a href="ths_dim.html">ths_dim</a>, <a href="ths_dmo.html">ths_dmo</a>
+    Published output in the Help browser
+       showdemo jcb_dim
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

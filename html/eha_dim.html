@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>eha_dim :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>eha_dim</h1>
+<p> Computes drawdown for stepdrawdown tests according to EdenHazel (1973) </p>
+ 
+<h2>Syntax</h2>
+<pre>s = eha_dim( p, t)
+ 
+    p(1) = a  = slope of late time straight line in m
+    p(2) = A1 = intercept of the first straight line (at Hn=0) in m
+    p(3) = A2 = intercept of the second straight line (at Hn=0) in m
+    p(4) = A2 = intercept of the second straight line (at Hn=0) in m
+    etc.
+ 
+    t = measured time 
+    s = drawdown
+ 
+</pre>
+<h2>Description</h2>
+<pre> 
+    Computes the drawdown for a step drawdown test with the Eden and Hazel
+    (1973) method. This solution consists in a series of straight lines
+    having all the same slope (a) and different intercepts for each steps
+    corresponding to a different pumping rate.
+ 
+    As opposed to the Jacob straight line, the intercepts corresponds to
+    the value of the drawdown obtained when the straight line toward is
+    extended and crosses the vertical axis at Hn=0.
+ 
+    Hn is a reduced time that accounts for all the variations of pumping
+    rates. Hn is calculated by the eha_pre function.
+ 
+  WARNING: eha_dim can be used only if eha_pre has been called before, in
+     order to initialize the pumping rate history.
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="eha_dmo.html">eha_dmo</a>, <a href="eha_pre.html">eha_pre</a>, <a href="eha_gss.html">eha_gss</a>, <a href="eha_rpt.html">eha_rpt</a>
+    Published output in the Help browser
+       showdemo eha_dim
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

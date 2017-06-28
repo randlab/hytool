@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<demos>
+
+<name>Hytool</name>
+<type>toolbox</type>
+<icon>$toolbox/matlab/icons/matlabicon.gif</icon>
+<description>
+Hytool provides an open environement for the interpretation of well test in 
+matlab. The toolbox contains the most usual analytical solutions used to 
+describe groundwater around wells, as well as functions for importing,  
+displaying the data, and then fitting a model to the data.
+</description>
+
+<demosection>
+   <label>Steady state pumping tests</label>
+   <demoitem>
+      <label>Interpreting data with the Thiem solution</label>
+      <file>html/thiem_dmo.html</file>
+   </demoitem>
+</demosection>
+
+<demosection>
+   <label>Constant rate interference tests</label>
+   <demoitem>
+      <label>Interpreting data with the Theis (1935) solution</label>
+      <file>html/ths_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting data with the Theis (1941) solution with constant head boundary</label>
+      <file>html/thc_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting data with the Theis (1941) solution with no-flow boundary</label>
+      <file>html/thn_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting data in the aquifer during a test in a large diameter well using the Papadopulos-Cooper (1967) solution and using a single storativity value.</label>
+      <file>html/pca_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting data in the aquifer during a test in a large diameter well using the Papadopulos-Cooper (1967) solution and using two single storativity values.</label>
+      <file>html/pcb_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting data in the aquifer during a test in a large diameter well with skin effect using the Agarwal (1970) solution.</label>
+      <file>html/aga_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Leaky aquifer with the Hantush (1957) solution</label>
+      <file>html/htj_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Unconfined delay yield aquifer with Boulton (1963)</label>
+      <file>html/blt_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Single vertical fracture of infinite conductivity (Gringarten, 1974)</label>
+      <file>html/grg_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Double porosity fractured aquifer (Warren and Root, 1965)</label>
+      <file>html/war_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>General Radial Flow model (Barker, 1988)</label>
+      <file>html/grf_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Fractal model (Delay, 2004)</label>
+      <file>html/del_dmo.html</file>
+   </demoitem>
+</demosection>
+
+<demosection>
+   <label>Single well tests</label>
+   <demoitem>
+      <label>Large diameter well - Papadopulos-Cooper (1967) solution</label>
+      <file>html/pcw_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Step-drawdown test - Eden-Hazel (1973) solution</label>
+      <file>html/eha_dmo.html</file>
+   </demoitem>
+</demosection>
+
+<demosection>
+   <label>Variable rate and recovery tests</label>
+   <demoitem>
+      <label>Interpreting a variable rate test with the Theis (1935) solution</label>
+      <file>html/tmr_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting a variable rate test with the Theis (1941) solution with a constant head boundary</label>
+      <file>html/tmc_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting a variable rate test by deconvoluting the data with Birsoy and Summers (1980) solution</label>
+      <file>html/birsoy_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting a recovery test using the Agarwal (1980 time.</label>
+      <file>html/agarwal_dmo.html</file>
+   </demoitem>
+</demosection>
+
+<demosection>
+   <label>Other tests</label>
+   <demoitem>
+      <label>Interpreting a slug test with the Cooper et al (1967) solution</label>
+      <file>html/csl_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting a pulse test with the Neuzil (1981) solution</label>
+      <file>html/nsl_dmo.html</file>
+   </demoitem>
+   <demoitem>
+      <label>Interpreting a constant head test with Jacob and Lohman (1952) solution</label>
+      <file>html/jlq_dmo.html</file>
+   </demoitem>
+</demosection>
+
+</demos>

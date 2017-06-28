@@ -1,0 +1,77 @@
+<html>
+<head>
+    <title>Hytool Toolbox Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+<body>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr><td
+valign=baseline bgcolor="#e7ebf7"><b>Hydrogeological Toolbox</b></td></tr></table>
+
+<h1>Release Notes</h1>
+
+<hr>
+
+
+<h2>Version 2.05</h2>
+<p>June 2017
+<p>This version contains a rather long series of
+   minor bug fixes and adaptation to the release 2017
+  of matlab. The version has now been transfered to github.
+
+<h2>Version 2.0</h2>
+<p>October 2007
+<p>This version corresponds to a major update of hytool. This was made
+possible thanks to the support of the Spanish Geological Survey (IGME) and
+the work of Damien Glenz and S&eacute;bastien Deyres.
+
+<h2>Summary of the changes.</h2>
+<ul type="disc">
+<li>A systematic html help is provided, with search tools.
+<li><a href="examples.html">Demos</a> have been prepared for most of the models.
+<li>The syntax of basic functions has changed in order to be more
+systematic.
+<ul>
+<li>The non linear fit function that were specific to each model
+(ths_fit, pcw_fit, csl_fit, etc.) are now replaced by a unique and generic
+ <a href="fit.html">fit</a> function.
+<li>The functions allowing to plot the results of a test have named
+with the rpt suffix instead of tst suffix. Example: <a href="ths_rpt.html">ths_rpt</a>, etc.
+<li>The function slug_trial has been removed. The function <a href="trial.html">
+trial</a> can now be used both for pumping, slug or pulse tests.
+<li>The trial function now uses only the basename of a model. See: <a href="trial.html">
+trial</a>
+<li>A large number of functions under development has been removed from the
+main distribution. These functions are still available in the dev directory,
+but they are not systematically documented, and validated and should therefore
+be used with caution.
+</ul>
+<li>The Agarwal time formula has been coded for variable rate tests. See:
+<a href="agarwal_time.html">agarwal_time</a>
+<li>The report functions have been changed to allow interactive modification
+of the graphics.
+<li>Most of the routines have been improved and rewritten, in order to be more
+robust to errors and to provide a more systematic access to the toolbox
+fonctionalities. A large number of new options have been added.
+<li>Internal functions to build the help files were developped.
+</ul>
+
+
+<hr>
+
+<p>To know the history of the  releases of Hytool, see the
+<a href="Version_History.html">Version History document</a>.</p>
+
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr><td
+valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+
+
+
+<p>&copy; 1998-2017 Philppe Renard and Co.
+    <tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+    <tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html><head><title>Hytool Toolbox Documentation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>Hydrogeological Toolbox</b></td></tr></table>
+<h1>Convention for the suffixes</h1>
+
+<hr>
+<h2>Main functions</h2>
+
+
+<table width="70%" border="0" cellpadding=3 cellspacing=0>
+ <tr><td width="50" valign="top"><i>dmo</i></td>
+   <td width="700" valign="top"> <b>Provides a demo</b> of an interpretation
+    made with a given model. </td></tr>
+ 
+ <tr><td width="50" valign="top"><i>pre</i></td>
+    <td width="700" valign="top"> <b>Pre-processing</b> and intialization 
+    of the data that are required for the interpretation. Only some models
+    have the function pre. It must be executed before all the others. </td></tr>
+ 
+ <tr><td width="50" valign="top"><i>gss</i></td>
+    <td width="700" valign="top"> <b>Guesses the parameters</b> of the model from 
+    time-drawdown data. This rough estimates allows to initialize the
+    iterative non-linear least squares. </td></tr>
+    
+ <tr><td width="50" valign="top"><i>rpt</i></td>
+    <td width="700" valign="top"> <b>Reports the results</b> of the 
+    interpretation in a graphical form.
+    </td></tr>
+
+ <tr><td width="50" valign="top"><i>dim</i></td>
+    <td width="700" valign="top"> <b>Computes the solution</b>.  
+      The user must provide the model parameters
+      and the time values. </td></tr>
+</table>
+</p>
+
+<hr>
+
+<h2>Additional functions</h2>
+
+
+<table width="70%" border="0" cellpadding=3 cellspacing=0>
+
+ <tr><td width="50" valign="top"><i>std</i></td>
+    <td width="700" valign="top"> <b>Steady state</b> solution. In some cases, 
+    steady state are available and we then use the std suffix.</td></tr>
+
+ <tr><td width="50" valign="top"><i>drw</i></td>
+    <td width="700" valign="top"> <b>Draws the type curves</b> of a model.</td></tr>
+</table>
+</p>
+
+<hr>
+
+<h2>Internal functions</h2>
+
+
+<table width="70%" border="0" cellpadding=3 cellspacing=0>
+
+ <tr><td width="50" valign="top"><i>lap</i></td>
+   <td width="700" valign="top"> Computes the dimensionless solution 
+      in the <b>Laplace</b> domain. </td></tr>
+      
+ <tr><td width="50" valign="top"><i>dls</i></td>
+   <td width="700" valign="top"> Computes the <b>dimensionless</b> solution. 
+      in the real domain. </td></tr>
+      
+ <tr><td width="50" valign="top"><i>jac</i></td>
+   <td width="700" valign="top"> Computes the  <b>Jacobian</b> domain. </td></tr>
+
+</table>
+</p>
+<hr>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table><p>&copy; 1998-2007 Philippe Renard and Co.<tt class="minicdot">&#149;</tt> <a href="file:license.txt">Terms of Use</a> <tt class="minicdot">&#149;</tt> <a href="file:acknowledgments.html">Acknowledgments</a></p></body></html>

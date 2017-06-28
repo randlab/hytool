@@ -1,0 +1,147 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Dradown in the aquifer - two storativities.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="pcb_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Dradown in the aquifer - two storativities.</h1><!--introduction--><p>This demonstrates the interpretation of a Drawdown in the aquifer with well-bore storage effect with Papadopulos and Cooper (1967) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">Interpretation</a></li><li><a href="#3">Comparison with Hall and Chen (1996)</a></li></ul></div><p>The data set for this example comes from the following reference: HALL P., CHEN J., 1996. Water well and aquifer test analysis. Water Resources Publications, LLC, 412 pp. The test data are published on page 171-174. and interpreted with the Papadopulos-Cooper model with 2 differents storativities.</p><p>Let us first load the data set and initialize the pdb function.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'pca_ds1.dat'</span>);
+rw=0.6096;              <span class="comment">% Radius of the well in m</span>
+rc=0.6096;              <span class="comment">% Radius of the casing in m</span>
+r=3.048;                <span class="comment">% Radial distance in m</span>
+q=0.0050472;            <span class="comment">% Pumping Rate in m3/s</span>
+pcb_pre(rw,rc,r,q);
+</pre><h2 id="2">Interpretation</h2><p>The interpretation follows the usual techniques in hytool with the guess of the parameters, non linear fit, and reporting.</p><p>We obtain a good fit in that case (if we compare with pda_dmo and aga_dmo). The values of resulting parameters are: T = 8.3 e-4 m2/s, S = 2.2 e-3, and Cd = 73</p><pre class="codeinput">p0=pcb_gss(t,s);
+p=fit(<span class="string">'pcb'</span>,p0,t,s);
+pcb_rpt(p,t,s,<span class="string">'Hall and Chen (1996) example'</span>);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0         8.37197
+           1         3.05649         57.4893         352.562
+           2         1.94752         37.9147         310.901
+           3         0.63746         18.2098         96.7671
+           4        0.300984         13.2266          76.921
+           5       0.0914809         5.20834         41.2251
+           6       0.0335284         3.73745         29.7286
+           7      0.00719166         1.62802          14.174
+           8      0.00296421        0.507774         3.00713
+           9      0.00266249        0.109754         2.17541
+          10      0.00265436     0.000358503       0.0320022
+          11      0.00265151       0.0039258        0.411592
+          12      0.00265149      0.00388375     9.31188e-05
+          13      0.00265149      0.00388978      9.2256e-16
+Iterations terminated: relative norm of the current step is less than OPTIONS.TolX
+</pre><img vspace="5" hspace="5" src="pcb_dmo_01.png" alt=""> <h2 id="3">Comparison with Hall and Chen (1996)</h2><p>Our results are in good agreement with the values found by Hall and Chen (1996) - figure 9.8 page 174 :   alpha = 0.01   which is equivalent to Cd = 50   T    = 7.8E-04   S1   = 2.9E-03   S2   = 1.0E-02</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Dradown in the aquifer - two storativities.
+% This demonstrates the interpretation of a Drawdown in the aquifer 
+% with well-bore storage effect with Papadopulos and Cooper (1967) solution
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example comes from the following reference: 
+% HALL P., CHEN J., 1996. Water well and aquifer test analysis.
+% Water Resources Publications, LLC, 412 pp.
+% The test data are published on page 171-174. and interpreted with the
+% Papadopulos-Cooper model with 2 differents storativities.
+%
+% Let us first load the data set and initialize the pdb function.
+
+[t,s]=ldf('pca_ds1.dat');
+rw=0.6096;              % Radius of the well in m
+rc=0.6096;              % Radius of the casing in m
+r=3.048;                % Radial distance in m
+q=0.0050472;            % Pumping Rate in m3/s
+pcb_pre(rw,rc,r,q);
+
+%% Interpretation
+% The interpretation follows the usual techniques in hytool with the
+% guess of the parameters, non linear fit, and reporting.
+% 
+% We obtain a good fit in that case (if we compare with pda_dmo and
+% aga_dmo). The values of resulting parameters are:
+% T = 8.3 e-4 m2/s, S = 2.2 e-3, and Cd = 73
+%
+p0=pcb_gss(t,s); 
+p=fit('pcb',p0,t,s);
+pcb_rpt(p,t,s,'Hall and Chen (1996) example');
+
+%% Comparison with Hall and Chen (1996)
+% Our results are in good agreement with the values found by
+% Hall and Chen (1996) - figure 9.8 page 174 :
+%   alpha = 0.01   which is equivalent to Cd = 50
+%   T    = 7.8E-04
+%   S1   = 2.9E-03
+%   S2   = 1.0E-02
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,197 @@
+<html>
+<head>
+    <title>Hytool Toolbox Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+<body>
+      
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr><td
+valign=baseline bgcolor="#e7ebf7"><b>Hydrogeological Toolbox</b></td></tr></table>
+
+<h1>Hytool - The versions</h1>
+
+<hr>
+
+<p> This document summarizes the history of the different versions of hytool. 
+
+<h2>Version 0.0</h2>
+<ul type="disc">
+<li>Start of development in 1998
+</ul>
+
+<h2>Version 1.0</h2>
+
+<p>October 2001
+<ul type="disc">
+<li>The first documented version
+</ul>
+
+<h2>Version 1.2</h2>
+
+<p>December 2002
+<ul type="disc">
+<li>Improvement of the Graphical reports (tst)
+<li>New solution : Gringarten and Ramey
+<li>Improvement of the step drawdown method (eha)
+<li>Improvement of the step drawdown method (eha)
+</ul>
+
+<h2>Version 1.3</h2>
+<p>August 2003
+<ul type="disc">
+<li>Improvement of slug tests interpretations
+<li>Modification of all the functions related to 
+  the Cooper et al. solution (replacing alpha
+  by Cd) and modification of the guess algorithm (gss)
+  addition of a radius of investigation calculation
+<li>Implementation of the solution of Ramey et al.
+  with a skin effect
+<li>Implementation of the solution of Dougherty
+  with partal penetration (dls)
+<li>Creation of ldf_slg to enhance the efficiency of
+  slug test interpretation
+</ul>
+  
+<h2>Version 1.4</h2>
+<p>
+October-December 2003
+<ul type="disc">
+<li>Improvement of the Barker grf model
+<li>Development and validation of the Gringarten model (grg)
+<li>Development of an interactive windowing for the Theis
+  method and for slug test (ezwt and ezst)
+<li>Implementation of the Cinco-Ley solution for fractured
+  wells
+<li>Implementation of the Hvorslev model for slug test
+<li>Implementation of the prs model for spherical flow slug test
+</ul>
+  
+<h2>Version 1.5</h2>
+<p>
+Jannuary-March 2004
+<ul type="disc">
+185 M-files, 2366 lines of code, 1000 lines of comments
+<li>Improvement of the Warren and Root technique
+<li>Updating the documentation
+<li>Implementation of the graphical interfaces ezwt and ezst
+</ul>
+
+<h2>Version 1.5.2</h2>
+<p>
+April 2005
+<ul type="disc">
+<li>Corrections of the help files to make them homogeneous
+<li>Correction of eha_tst to replace the variable name C by B
+<li>Correction of eha_tst so that it accepts both a line vector
+  and a column vector for p
+<li>Correction of thn_gss
+</ul>
+
+<h2>Version 1.6</h2>
+<p>
+September 2005
+<ul type="disc">
+<li>Implementation of the solution of Delay et al. 2004: 
+  functions del_dim and del_tst
+<li>Implementation of the solution trm for Theis Multiple
+  Rates tmr_pre, tmr_dim, etc.
+</ul>
+
+<h2>Version 1.7</h2>
+<p>
+Mai 2006
+<ul type="disc">
+<li>Corrections of the help in tmr
+<li>Implementation of the htj_gss, fit, and tst functions
+<li>Modification of diagnostic(t,s) to open a single figure
+</ul>
+
+<h2>Version 1.8</h2>
+<p>
+Novembre 2006
+<ul type="disc">
+<li>Correction d'un bug dans la solution de Warren et Root war_dls
+<li>Mise à jour de hmb_drw et pca_drw
+</ul>
+
+<h2>Version 1.9</h2>
+<p>
+March 2007
+<ul type="disc">
+<li>Correction de GRF - Ajout des fonctions gss, fit et tst
+<li>Adding new function ths_dmo
+<li>Correction of Contents.m
+</ul>
+
+<h2>Version 1.91</h2>
+<p>
+Mai 2007
+<ul type="disc">
+<li>Corrections of a few bugs
+<li>New functions jlq_dim, jlq_gss, jlq_fit, jlq_tst, jlq_dmo
+<li>New functions birsoy_time, birsoy_demo
+<li>Correction of Contents.m
+</ul>
+
+<h2>Version 2.0beta</h2>
+<p>
+July 2007
+<ul type="disc">
+<li>Development of a set of new functions.
+<li>nzl  Neuzil for pressurized test
+<li>tmc  Multiple rate constant head
+<li>filters and samplers
+<li>hbw and hba  Hamm and bidaux
+<li>pca and pcb  Papadopulos cooper in aquifer
+<li>aga  Agarwal in aquifer
+<li>Corrections of a few bugs in the figures created with tst
+</ul>
+
+
+<h2>Version 2.0</h2>
+<p>
+October 2007
+<ul type="disc">
+<li>Release of the version 2.0
+</ul>
+
+<h2>Version 2.01</h2>
+<p>
+April 2008
+<ul type="disc">
+<li>Online distribution of version 2.0 on sourceforge.net, followed by 2.01
+<li>Corrections of a some errors in the help files, and in the syntax of the
+    commands hyselect, nsl_rpt, nsl_gss, csl_rpt, blt_pre
+</ul>
+
+
+<h2>Version 2.02</h2>
+<p>
+October 2008
+<ul type="disc">
+<li>Modification of the fit() function in order to compute confidence interval 
+    and display the history of the fitting process.
+</ul>
+          
+<h2>Version 2.03</h2>
+<p>
+May 2010
+<ul type="disc">
+<li>Adding the WAW model for single well test in double porosity aquifer. 
+<li>Minor bug corrections
+</ul>
+
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr><td
+valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+
+
+
+<p>&copy; 1998-2010 Philppe Renard and Co.
+    <tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a> 
+    <tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+
+</body>
+</html>
+

@@ -1,0 +1,150 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Agarwal et al. solution in the aquifer</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="aga_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Agarwal et al. solution in the aquifer</h1><!--introduction--><p>This is a demo of the interpretation of an intereference pumping test with the Agarwal (1970) solution (skin + well capacity).</p><p>Copyright 1998-2007 - Philippe Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load the data</a></li><li><a href="#2">Interpretation</a></li></ul></div><h2 id="1">Load the data</h2><p>The data for this example has been typed from: HALL P., CHEN J., 1996. Water well and aquifer test analysis. Water Resources Publications, LLC, 412 pp. The test data are published on page 171-174. and interpreted with the Papadopulos-Cooper model with 2 differents storativities.</p><p>Let us first load the data.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'pca_ds1.dat'</span>);
+rw=0.6096;              <span class="comment">% Radius of the well in m</span>
+rc=0.6096;              <span class="comment">% Radius of the casing in m</span>
+r=3.048;                <span class="comment">% Radial distance in m</span>
+Q=0.0050464;            <span class="comment">% Pumping rate m3/s</span>
+aga_pre(rw,rc,r,Q);
+</pre><h2 id="2">Interpretation</h2><p>We can then fit the model. It happens that it is not possible to get a good automatic fit or manual fit to the data with the Agarwal model. We keep only the manual fit which is based on the late time data for the transmissivity. We find: T = 8.8 e-4 m2/s, S = 6.7 e-4, sigma=-0.7</p><pre class="codeinput">p0=aga_gss(t,s);
+p=fit(<span class="string">'aga'</span>,p0,t,s);
+p=[1.1,8,-0.7];
+aga_rpt(p,t,s,<span class="string">'Hall &amp; Chen example - Automatic fit'</span>);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0         2.96859
+           1        0.809635          10.643         2.56031
+           2        0.602575         2.57687        0.305913
+           3        0.579122        0.928909       0.0542129
+           4        0.564727         1.94591       0.0431654
+           5        0.464337        0.347985        0.317316
+           6        0.423636         18.5125         1.43979
+           7        0.218587         8.62133         1.62193
+           8        0.169782        0.781712        0.648164
+           9        0.169167         0.01784        0.111732
+          10        0.169151       0.0771058       0.0434526
+          11        0.169146      0.00414206      0.00271228
+          12        0.169146      0.00627126      0.00435664
+          13        0.169146       0.0145658     0.000803919
+          14        0.169145      0.00720951     0.000235349
+          15        0.169145        0.010657     0.000577208
+          16        0.169145      0.00599888     0.000286357
+          17        0.169145      0.00672841     9.18217e-05
+          18        0.169145        0.013221     3.97479e-06
+          19        0.169145       0.0037887     3.73614e-08
+Iterations terminated: relative norm of the current step is less than OPTIONS.TolX
+</pre><img vspace="5" hspace="5" src="aga_dmo_01.png" alt=""> <p>For comparison, the results found by Hall and Chen using the Papadopulos-Cooper (1967) model using two different storativities is :   alpha = 0.002   which is equivalent to Cd = 1000   T    = 7.97e-04 m2/s   S1   = 3.49e-03   S2   = 2.00e-03</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Agarwal et al. solution in the aquifer
+% This is a demo of the interpretation of an intereference pumping test 
+% with the Agarwal (1970) solution (skin + well capacity).
+%
+% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%% Load the data
+% The data for this example has been typed from: 
+% HALL P., CHEN J., 1996. Water well and aquifer test analysis.
+% Water Resources Publications, LLC, 412 pp.
+% The test data are published on page 171-174. and interpreted with the 
+% Papadopulos-Cooper model with 2 differents storativities.
+%
+% Let us first load the data.
+
+[t,s]=ldf('pca_ds1.dat');
+rw=0.6096;              % Radius of the well in m
+rc=0.6096;              % Radius of the casing in m
+r=3.048;                % Radial distance in m
+Q=0.0050464;            % Pumping rate m3/s
+aga_pre(rw,rc,r,Q);
+
+%% Interpretation
+% We can then fit the model. It happens that it is not possible to get a
+% good automatic fit or manual fit to the data with the Agarwal model. 
+% We keep only the manual fit which is based on the late time data
+% for the transmissivity. We find:
+% T = 8.8 e-4 m2/s, S = 6.7 e-4, sigma=-0.7
+p0=aga_gss(t,s);
+p=fit('aga',p0,t,s);
+p=[1.1,8,-0.7];
+aga_rpt(p,t,s,'Hall & Chen example - Automatic fit');
+
+%% 
+% For comparison, the results found by Hall and Chen using the 
+% Papadopulos-Cooper (1967) model using two different storativities is :
+%   alpha = 0.002   which is equivalent to Cd = 1000
+%   T    = 7.97e-04 m2/s
+%   S1   = 3.49e-03 
+%   S2   = 2.00e-03
+
+
+
+##### SOURCE END #####
+--></body></html>

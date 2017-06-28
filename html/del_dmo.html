@@ -1,0 +1,183 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Fractal solution in 2 dimensions</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="del_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Fractal solution in 2 dimensions</h1><!--introduction--><p>This demonstrates the interpretation of pumping test with the Delay (2004) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example comes from the following reference: Problem data provided by Fred Delay (2006)</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'del_ds1.dat'</span>);
+figure (1)
+diagnostic(t,s)
+</pre><img vspace="5" hspace="5" src="del_dmo_01.png" alt=""> <p>We then define the values of the parameters that are required for the interpretation:</p><pre class="codeinput">q=0.017916;             <span class="comment">% Pumping rate in m3/s</span>
+r=70.75;                <span class="comment">% Radial distance in m</span>
+</pre><p>Once the data have been loaded and the parameter defined, we can interpret the data. We do that as usually in two steps. First the parameters p of the model are estimated with the diagnostic plot. Then we find an optimum fit.</p><pre class="codeinput">p=fit(<span class="string">'del'</span>,[0.1,1e2,0.2,0.02],t,s);
+</pre><pre class="codeoutput"> HYTOOL WARNING : Due to the large number of data, the non linear fit
+                  function may be very slow. To avoid such inconvenience
+                  hytool has resampled the signal to keep only 150 points.
+                  If you want to force hytool to use all the data, please
+                  use the following syntax: p=fit('model',t,s,'all')
+ WARNING:  hysampling - the number of selected values is smaller than requested
+           because there is not enough data points to sample regularly the signal.
+ 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0        0.350328
+           1        0.184561         46.7324          22.701
+           2        0.158071         4.83985         7.02999
+           3        0.141102         4.83679         6.02029
+           4        0.126489         4.57217         5.14569
+           5        0.113835         4.38177         4.46386
+           6        0.102814         4.19681         3.90051
+           7       0.0931642          4.0158         3.42951
+           8       0.0846753         3.83978         3.03246
+           9       0.0771748          3.6697         2.69531
+          10        0.070521         3.50617         2.40711
+          11       0.0645962         3.34953         2.15924
+          12       0.0593027         3.19992         1.94484
+          13        0.054558         3.05734          1.7584
+          14       0.0502927         2.92166         1.59548
+          15       0.0464479          2.7927         1.45246
+          16       0.0429731         2.67023         1.32635
+          17       0.0398252         2.55399         1.21471
+          18       0.0373461         86.4984         8.41611
+          19       0.0133369         20.9057         3.48493
+          20      0.00855367         19.6122         2.34946
+          21      0.00566598          12.271         1.53613
+          22      0.00410802         8.00699         1.06654
+          23      0.00321263         5.20336        0.765492
+          24      0.00268107         3.39605        0.564119
+          25      0.00235743         2.22799        0.424204
+          26      0.00215669         1.47026        0.324041
+          27      0.00203046         12.5361        0.905538
+          28      0.00180654          1.4609        0.298963
+          29      0.00180384      0.00191044       0.0129739
+          30      0.00180384     8.68384e-07     0.000291301
+          31      0.00180384     9.13437e-07     2.06341e-16
+Iterations terminated: relative norm of the current step is less than OPTIONS.TolX
+Warning: The Jacobian at the solution is ill-conditioned, and some model
+parameters may not be estimated well (they are not identifiable).  Use caution
+in making predictions. 
+</pre><p>We can then display the result of the interpretation. Hytool find that the folowing values fort the transmissivity and storativity:</p><p>T = 7.5e-2 m2/s and S = 5.7e-4</p><pre class="codeinput">figure (2)
+del_rpt(p,t,s,[0.017916,70.75],<span class="string">'Delay example - automatic fit'</span>)
+figure(3)
+del_rpt([0.044,1.7e1,0.25459,0.025459],t,s,[q,r], <span class="string">'Delay example - manual fit'</span>)
+</pre><img vspace="5" hspace="5" src="del_dmo_02.png" alt=""> <img vspace="5" hspace="5" src="del_dmo_03.png" alt=""> <p>The results are in reasonable agreement with the values found by Fred Delay (personal communication): T0 = 7.97 e-2 m2/s S0 = 4.89 e-4 alpha = 0.2546 gamma = 0.02546</p><p>We then find that the fits are rather similar and both acceptable.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Fractal solution in 2 dimensions
+% This demonstrates the interpretation of pumping test with the
+% Delay (2004) solution
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example comes from the following reference: 
+% Problem data provided by Fred Delay (2006)
+%
+% Let us first load the data and plot them.
+
+[t,s]=ldf('del_ds1.dat');
+figure (1)
+diagnostic(t,s)
+
+%% 
+% We then define the values of the parameters that are required for the
+% interpretation:
+%
+q=0.017916;             % Pumping rate in m3/s
+r=70.75;                % Radial distance in m
+
+%%
+% Once the data have been loaded and the parameter defined, we can
+% interpret the data. We do that as usually in two steps. First the
+% parameters p of the model are estimated with the diagnostic plot. Then
+% we find an optimum fit.
+%
+p=fit('del',[0.1,1e2,0.2,0.02],t,s);
+
+%%
+% We can then display the result of the interpretation.
+% Hytool find that the folowing values fort the transmissivity and
+% storativity:
+%
+% T = 7.5e-2 m2/s and S = 5.7e-4
+
+figure (2)
+del_rpt(p,t,s,[0.017916,70.75],'Delay example - automatic fit')
+figure(3)
+del_rpt([0.044,1.7e1,0.25459,0.025459],t,s,[q,r], 'Delay example - manual fit')
+
+%%
+% The results are in reasonable agreement with the values found by 
+% Fred Delay (personal communication):
+% T0 = 7.97 e-2 m2/s
+% S0 = 4.89 e-4
+% alpha = 0.2546
+% gamma = 0.02546
+
+%%
+% We then find that the fits are rather similar and both acceptable.
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,146 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Interpretation of a slug test</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="csl_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Interpretation of a slug test</h1><!--introduction--><p>This demonstrates the interpretation of a slug test with the Cooper et al. (1967) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load the data</a></li><li><a href="#2">Interpretation</a></li></ul></div><h2 id="1">Load the data</h2><p>The data set for this example comes from: Butler James, 1998, The design, performance and analysis of slug tests. Lewis Publisher. Data set from table 5.2 pp. 61-62. Localisation: Test performed in a monitoring well in Lincoln County, Kansas Geology : The well was screened in a deltaic sequence consisting of mudstone interbedded with very fine sandstone</p><p>Let us first load the data</p><pre class="codeinput">[t,s]=ldf(<span class="string">'csl_ds1.dat'</span>);
+</pre><h2 id="2">Interpretation</h2><p>Once the data have been loaded and the parameter defined, we can interpret the data. As usual, we can use the guess function to obtain a first estimates of the parameter and check the quality of the first guess with the trial function.</p><p>Note that the trial function can be used to adjust manually the parameters if required.</p><pre class="codeinput">p=csl_gss(t,s);
+trial(<span class="string">'csl'</span>,p,t,s)
+</pre><img vspace="5" hspace="5" src="csl_dmo_01.png" alt=""> <p>We then apply the non linear fit and create the report. We find  the folowing values for the transmissivity:</p><p>T = 1.3 e-8 m2/s Cd = 45 for the wellbore storage coefficient</p><pre class="codeinput">p=fit(<span class="string">'csl'</span>,p,t,s);
+rw=0.071;               <span class="comment">% Radius of the well in m</span>
+rc=0.025;               <span class="comment">% Radius of the casing in m</span>
+csl_pre(rw,rc);
+csl_rpt(p,t,s,<span class="string">'Butler example - automatic fit'</span>)
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0      0.00748307
+           1      0.00415603      0.00118971         3261.17
+           2      0.00271204     0.000352819         740.016
+           3      0.00234342     0.000103171         228.352
+           4      0.00215481     5.27217e-05         304.757
+           5      0.00194699     7.69686e-05          485.11
+           6      0.00187145     4.45939e-05         283.004
+           7      0.00182692     5.03067e-05         256.715
+           8      0.00181638     2.13386e-05         227.499
+           9      0.00181638     9.74909e-06      0.00578613
+          10      0.00181638     2.65543e-05     2.13093e-14
+Iterations terminated: relative norm of the current step is less than OPTIONS.TolX
+</pre><img vspace="5" hspace="5" src="csl_dmo_02.png" alt=""> <p>The results compares well with the values found by Cooper et al. (1967) with type-curve matching: alpha = 0.0125 corresponding to a value of Cd=40 T  = 1.23 e-8 m2/s</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Interpretation of a slug test
+% This demonstrates the interpretation of a slug test with the
+% Cooper et al. (1967) solution
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%% Load the data
+% The data set for this example comes from: 
+% Butler James, 1998, The design, performance and analysis of slug tests.
+% Lewis Publisher. Data set from table 5.2 pp. 61-62.
+% Localisation: Test performed in a monitoring well in Lincoln County, Kansas
+% Geology : The well was screened in a deltaic sequence consisting of mudstone interbedded with very fine sandstone
+%
+% Let us first load the data
+
+[t,s]=ldf('csl_ds1.dat');
+
+%% Interpretation
+% Once the data have been loaded and the parameter defined, we can
+% interpret the data. As usual, we can use the guess function to 
+% obtain a first estimates of the parameter and check the quality of
+% the first guess with the trial function.
+%
+% Note that the trial function can be used to adjust manually the
+% parameters if required.
+
+p=csl_gss(t,s); 
+trial('csl',p,t,s)
+
+%% 
+% We then apply the non linear fit and create the report.
+% We find  the folowing values for the transmissivity:
+%
+% T = 1.3 e-8 m2/s 
+% Cd = 45 for the wellbore storage coefficient
+%
+
+p=fit('csl',p,t,s);
+rw=0.071;               % Radius of the well in m
+rc=0.025;               % Radius of the casing in m
+csl_pre(rw,rc);
+csl_rpt(p,t,s,'Butler example - automatic fit')
+
+%%
+% The results compares well with the values found by 
+% Cooper et al. (1967) with type-curve matching:
+% alpha = 0.0125 corresponding to a value of Cd=40
+% T  = 1.23 e-8 m2/s 
+%
+
+##### SOURCE END #####
+--></body></html>

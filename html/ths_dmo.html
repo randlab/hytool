@@ -1,0 +1,314 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Theis (1935) interpretation.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="ths_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Theis (1935) interpretation.</h1><!--introduction--><p>This is a demonstration of the interpretation of a pumping test with the Theis (1935) solution.</p><p>Copyright 1998-2007 - Philippe Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load the data</a></li><li><a href="#3">Diagnostic plot</a></li><li><a href="#4">Hytool syntax</a></li><li><a href="#7">Model parameter guess</a></li><li><a href="#9">Manual parameter adjustment</a></li><li><a href="#13">Model parameter identification</a></li><li><a href="#14">Reporting the results</a></li><li><a href="#16">Summary</a></li></ul></div><h2 id="1">Load the data</h2><p>The data set for this example has been typed from: Table 5.1, page 172 in the following book: C.W. Fetter, 2001, Applied Hydrogeology, Fourth Edition. Prentice Hall, Upper Saddle River, 598 pp.</p><p>The data is stored in the ascii file 'ths_ds1.dat' that contains two columns as we can see if we edit the data file with the command edit. The first column is the time in seconds. The second column contains the drawdown in meters.</p><pre class="codeinput">edit <span class="string">ths_ds1.dat</span>
+</pre><p>Let us now load the data in the matlab workspace with the ldf function from hytool. This allows to create two vectors: t and s containing the data. We will use them in the next steps, but we can first plot them to check graphicaly that they have been correctly loaded.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'ths_ds1.dat'</span>);
+clf
+plot(t,s,<span class="string">'o'</span>)
+xlabel(<span class="string">'Time in seconds'</span>)
+ylabel(<span class="string">'Drawdown in meters'</span>)
+title(<span class="string">'The Fetter data set'</span>)
+</pre><img vspace="5" hspace="5" src="ths_dmo_01.png" alt=""> <h2 id="3">Diagnostic plot</h2><p>In order to display the diagnostic plot of the data, we use the function diagnostic(t,s) provided by hytool.</p><pre class="codeinput">diagnostic(t,s)
+
+<span class="comment">% The plot shows a typical 2D infinite acting radial flow.</span>
+<span class="comment">% The derivative stabilizes at late time and the derivative is larger than</span>
+<span class="comment">% the drawdown at early time.</span>
+<span class="comment">%</span>
+<span class="comment">% We will therefore interpret the data with the Theis (1935) solution</span>
+<span class="comment">% that allows to model such behaviour.</span>
+</pre><img vspace="5" hspace="5" src="ths_dmo_02.png" alt=""> <h2 id="4">Hytool syntax</h2><p>The syntax of hytool uses some basic convention that needs to be explained. Most of the functions have names that are made with a suffix and a prefix.</p><p>The prefix is a set of three letters that represent a certain model. For example, for the Theis (1935) model we use the letters ths. For the Papadopulos Cooper (1967) model for large diameter well, we use pcw.</p><p>The suffix indicates what the function does. For example, the action can be: guess the values of the parameters, in that case the suffix will be gss. If the action is report the results of an interpretation the suffix will be rpt.</p><p>With that convention we will have functions such as ths_gss, ths_rpt, pcw_gss, etc.</p><p>Along this tutorial, you will discover some functions that are applied to the Theis (1935) model. Try to remember the names of the suffix, they are general and will be applicable to other models.</p><h2 id="7">Model parameter guess</h2><p>In order to determine the value of the Theis model parameter, we first use the function ths_gss(t,s) to estimate roughly an initial guess p0.</p><p>For the Theis (1935) model, the parameter vector contains two values: the first is the slope a of the late time straight line, while the second parameter is the time t0 at which this straight line intercept the axis s=0.</p><pre class="codeinput">p0=ths_gss(t,s)
+</pre><pre class="codeoutput">
+p0 =
+
+    1.6872
+  332.4726
+
+</pre><p>To check visually the quality of this first guess, we then plot the model corresponding to these parameters and the data with the hytool function trial. The function trial can be applied for any model and therefore it requires that the name of model 'ths' is provided together with the values of the parameter p0 and the data. 'ths' is the name of the function that computes the drawdown from p0 and t.</p><p>We see in the resulting figure both in log-log and semi-log scale that the fit is already pretty good for this example.</p><pre class="codeinput">trial(<span class="string">'ths'</span>,p0,t,s)
+</pre><img vspace="5" hspace="5" src="ths_dmo_03.png" alt=""> <h2 id="9">Manual parameter adjustment</h2><p>In this example, the initial guess provided by ths_gss is good. However, in practice it may happen that it does not provide a reliable result. One can then change manually the values of the parameters and modify them iteratively until he obtains a reasonable first fit.</p><p>Let us show the procedure.</p><p>We start with a first value of the parameters, and make the plot. We see on the graph that the slope is too small and should be increased. We need to modify it.</p><pre class="codeinput">p0=[1.1,100];
+trial(<span class="string">'ths'</span>,p0,t,s)
+</pre><img vspace="5" hspace="5" src="ths_dmo_04.png" alt=""> <p>Therefore we increase the slope to 1.8 and plot the result.</p><p>The slope seems to be better but the straight line is shifted too much to the left. We must increase the value of t0 (the time at which the straight intercept the horizontal axis) in the next iteration.</p><pre class="codeinput">p0=[1.8,100];
+trial(<span class="string">'ths'</span>,p0,t,s)
+</pre><img vspace="5" hspace="5" src="ths_dmo_05.png" alt=""> <p>Let us change it to 500, and plot the results. We obtain a rather good fit even if it is not perfect.</p><pre class="codeinput">p0=[1.8,500];
+trial(<span class="string">'ths'</span>,p0,t,s)
+</pre><img vspace="5" hspace="5" src="ths_dmo_06.png" alt=""> <h2 id="13">Model parameter identification</h2><p>In the previous steps, we obtained a rough initial guess that is used here as an initial value in an iterative non linear optimization technique to fit the model to the complete data set. This is done with the hytool function fit.</p><p>We see visually that the fit has been improved. The values of the parameters have slightly changed.</p><pre class="codeinput">p=fit(<span class="string">'ths'</span>,p0,t,s)
+trial(<span class="string">'ths'</span>,p,t,s)
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0        0.319013
+           1       0.0206002        0.577263         92.0879
+           2       0.0169288      0.00323874         4.46954
+           3       0.0169287     6.04055e-07       0.0410354
+           4       0.0169287     7.94434e-10     0.000815964
+Iterations terminated: relative change in SSE less than OPTIONS.TolFun
+
+p =
+
+    1.7856  412.3414
+
+</pre><img vspace="5" hspace="5" src="ths_dmo_07.png" alt=""> <h2 id="14">Reporting the results</h2><p>The interpretation is finished. We need to report the results. This is done with the function ths_rpt(p,t,s,d,title). The function needs the values of some additional data to compute the Hydraulic parameters. For the Theis solution, we need the pumping rate q and the radial distance r between the pumping well and the observation well.</p><pre class="codeinput">q=1.3888e-2; <span class="comment">% Pumping rate in m3/s</span>
+r=250;       <span class="comment">% radial distance in m</span>
+ths_rpt(p,t,s,[q,r],<span class="string">'Theis interpretation of the Fetter data'</span>)
+</pre><img vspace="5" hspace="5" src="ths_dmo_08.png" alt=""> <p>The estimated transmissivity is 1.4e-3 m2/s and the storativity is 2.1e-5. These numbers compare well with the values estimated by Fetter (2001) which are the following:</p><p>Type curve matching (p.173): T = 1.5 e-3 m2/s S = 2.4 e-5</p><p>Straight line analysis (p. 174-175): T = 1.5 e-3 m2/s S = 1.7 e-5</p><h2 id="16">Summary</h2><p>Even if this demo was quite long because hytool offers the possibility to act at many different levels during the process, the important thing to remember is that the interpretation itself including loading the data and producing the report, is done in 4 lines of code. Once this is done, the user can edit the figure interactively and save it in a graphhical file.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'ths_ds1.dat'</span>);
+p0=ths_gss(t,s);
+p=fit(<span class="string">'ths'</span>,p0,t,s);
+ths_rpt(p,t,s,[q,r],<span class="string">'Theis interpretation of the Fetter data'</span>)
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0       0.0780946
+           1       0.0190964        0.240161         63.6098
+           2       0.0169302       0.0119199         16.0705
+           3       0.0169287     2.81735e-06        0.192545
+           4       0.0169287     4.75947e-09      0.00407839
+Iterations terminated: relative change in SSE less than OPTIONS.TolFun
+</pre><img vspace="5" hspace="5" src="ths_dmo_09.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Theis (1935) interpretation.  
+% This is a demonstration of the interpretation of a pumping test with the
+% Theis (1935) solution.
+%
+% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%% Load the data
+% The data set for this example has been typed from: 
+% Table 5.1, page 172 in the following book:
+% C.W. Fetter, 2001, Applied Hydrogeology, Fourth Edition.
+% Prentice Hall, Upper Saddle River, 598 pp.
+%
+% The data is stored in the ascii file 'ths_ds1.dat' that contains two
+% columns as we can see if we edit the data file with the command edit. 
+% The first column is the time in seconds. The second column contains the
+% drawdown in meters.
+
+edit ths_ds1.dat
+
+%%
+% Let us now load the data in the matlab workspace with the ldf 
+% function from hytool. This allows to create two vectors: t and s
+% containing the data. We will use them in the next steps, but we can first
+% plot them to check graphicaly that they have been correctly loaded.
+
+[t,s]=ldf('ths_ds1.dat');
+clf
+plot(t,s,'o')
+xlabel('Time in seconds')
+ylabel('Drawdown in meters')
+title('The Fetter data set')
+
+%% Diagnostic plot
+% In order to display the diagnostic plot of the data, we use the 
+% function diagnostic(t,s) provided by hytool.
+
+diagnostic(t,s)
+
+% The plot shows a typical 2D infinite acting radial flow.
+% The derivative stabilizes at late time and the derivative is larger than
+% the drawdown at early time. 
+%
+% We will therefore interpret the data with the Theis (1935) solution
+% that allows to model such behaviour.
+
+%% Hytool syntax
+% The syntax of hytool uses some basic convention that needs to be
+% explained. Most of the functions have names that are made with a suffix
+% and a prefix. 
+%
+
+%%
+% The prefix is a set of three letters that represent a
+% certain model. For example, for the Theis (1935) model we use the letters
+% ths. For the Papadopulos Cooper (1967) model for large diameter well, we
+% use pcw. 
+%
+% The suffix indicates what the function does. For example, the action can
+% be: guess the values of the parameters, in that case the suffix will be gss. If the
+% action is report the results of an interpretation the suffix will be rpt.
+% 
+% With that convention we will have functions such as ths_gss, ths_rpt,
+% pcw_gss, etc.
+
+%%
+% Along this tutorial, you will discover some functions that are applied to
+% the Theis (1935) model. Try to remember the names of the suffix, they are general
+% and will be applicable to other models.
+
+%% Model parameter guess
+% In order to determine the value of the Theis model parameter, we first 
+% use the function ths_gss(t,s) to estimate roughly an initial guess p0.
+%
+% For the Theis (1935) model, the parameter vector contains two values: the
+% first is the slope a of the late time straight line, while the
+% second parameter is the time t0 at which this straight line
+% intercept the axis s=0.
+
+p0=ths_gss(t,s)
+
+%%
+% To check visually the quality of this first guess, we then plot the model
+% corresponding to these parameters and the data with the hytool function
+% trial. The function trial can be applied for any model and therefore it
+% requires that the name of model 'ths' is provided together with the values of
+% the parameter p0 and the data. 'ths' is the name of the function that
+% computes the drawdown from p0 and t.
+%
+% We see in the resulting figure both in log-log and semi-log scale
+% that the fit is already pretty good for this example.
+
+
+trial('ths',p0,t,s) 
+
+
+
+%% Manual parameter adjustment
+% In this example, the initial guess provided by ths_gss is good. However, 
+% in practice it may happen that it does not provide a reliable result. One
+% can then change manually the values of the parameters and modify them
+% iteratively until he obtains a reasonable first fit.
+%
+% Let us show the procedure.
+
+
+%%
+% We start with a first value of the parameters, and make the
+% plot. We see on the graph that the slope is too small and should be
+% increased. We need to modify it.
+
+p0=[1.1,100];
+trial('ths',p0,t,s) 
+
+%%
+% Therefore we increase the slope to 1.8 and plot the result. 
+%
+% The slope seems to be better but the straight line is shifted 
+% too much to the left. We must increase the value of t0 (the
+% time at which the straight intercept the horizontal axis) in the next
+% iteration.
+
+p0=[1.8,100];
+trial('ths',p0,t,s) 
+
+%%
+% Let us change it to 500, and plot the results.
+% We obtain a rather good fit even if it is not perfect.
+
+p0=[1.8,500];
+trial('ths',p0,t,s) 
+
+%%  Model parameter identification
+% In the previous steps, we obtained a rough initial guess that is used here
+% as an initial value in an iterative non linear optimization technique to
+% fit the model to the complete data set. This is done with the hytool
+% function fit.
+%
+% We see visually that the fit has been improved. The values of the
+% parameters have slightly changed.
+
+p=fit('ths',p0,t,s)
+trial('ths',p,t,s) 
+
+%% Reporting the results
+% The interpretation is finished. We need to report the results.
+% This is done with the function ths_rpt(p,t,s,d,title). 
+% The function needs the values of some additional data to compute the
+% Hydraulic parameters. For the Theis solution, we need the pumping rate q
+% and the radial distance r between the pumping well and the observation
+% well.
+
+q=1.3888e-2; % Pumping rate in m3/s
+r=250;       % radial distance in m
+ths_rpt(p,t,s,[q,r],'Theis interpretation of the Fetter data')
+
+%%
+% The estimated transmissivity is 1.4e-3 m2/s and the storativity is
+% 2.1e-5. These numbers compare well with the values estimated by Fetter
+% (2001) which are the following:
+%
+% Type curve matching (p.173):
+% T = 1.5 e-3 m2/s 
+% S = 2.4 e-5 
+% 
+% Straight line analysis (p. 174-175):
+% T = 1.5 e-3 m2/s 
+% S = 1.7 e-5
+
+%% Summary
+% Even if this demo was quite long because hytool offers the possibility to
+% act at many different levels during the process, the important thing to
+% remember is that the interpretation itself including loading the data and
+% producing the report, is done in 4 lines of code. Once this is done, the
+% user can edit the figure interactively and save it in a graphhical file.
+
+[t,s]=ldf('ths_ds1.dat');
+p0=ths_gss(t,s);
+p=fit('ths',p0,t,s);
+ths_rpt(p,t,s,[q,r],'Theis interpretation of the Fetter data')
+##### SOURCE END #####
+--></body></html>

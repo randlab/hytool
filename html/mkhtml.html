@@ -1,0 +1,53 @@
+<html>
+<head>
+<title>mkhtml :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>mkhtml</h1>
+<p>Create individual HTML help file from a matlab file</p>
+ 
+<h2>Syntax</h2>
+<pre>mkhtml( basename , checkvisu )
+ 
+        basename  = name of the function without the .m extension
+        checkvisu = optional argument allowing to decide wether
+                    mkhtmldoc opens the html file in the web browser
+                    after it has been created.
+                    1 means open the browser, 0 means do not show it
+ 
+ 
+</pre>
+<h2>Description</h2>
+<pre>
+    This is an internal function used to build the html help of hytool.
+    It has been inspired by makehtmldoc from F. Moisy but significantly
+    modified to account for the specifity of hytool and in order to be less
+    general than the original version.
+ 
+</pre>
+<h2>Example</h2>
+<pre>
+    mkhtml('trial')
+    mkhtml('ldf',1)
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="mkhelp.html">mkhelp</a>
+    Published output in the Help browser
+       showdemo mkhtml
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>ths_dim :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>ths_dim</h1>
+<p> Compute drawdown with the Theis (1935) solution</p>
+ 
+<h2>Syntax</h2>
+<pre>s = ths_dim( p, t) 
+ 
+    p(1) = a  = slope of Jacob Straight Line in meters
+    p(2) = t0 = intercept with the horizontal axis for s = 0
+    t = measured time
+    s = measured drawdown
+ 
+</pre>
+<h2>Description</h2>
+<pre>
+    The Theis (1935) solution assumes that the aquifer is confined,
+    homogeneous, isotropic, and infinite. The well as radius that is
+    negligible. It is pumped at a constant rate Q and is 100 percent
+    efficient.   
+ 
+    Under these assumptions, Theis solution can be expressed as: 
+ 
+        s(r,t) = Q/(4 pi T) E1( r2S / 4Tt)
+ 
+    where Q is the pumping rate, T the transmissivity, r the radial 
+    distance between the pumping well and the observation well, 
+    S the storativity coefficient and t the time.  
+ 
+    To interpret field data with the Theis solution, it is expressed as a
+    function of two fitting parameters a and to which are defined as:   
+ 
+    a = 0.183 Q /T
+    t0 =  r2 S / 2.25 T 
+ 
+</pre>
+<h2>Example</h2>
+<pre>
+    s = ths_dim( p,t )
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="ths_dmo.html">ths_dmo</a>, <a href="ths_gss.html">ths_gss</a>, <a href="ths_rpt.html">ths_rpt</a>
+    Published output in the Help browser
+       showdemo ths_dim
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

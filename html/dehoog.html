@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>dehoog :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>dehoog</h1>
+<p> numerical inverse Laplace transform</p>
+ 
+<h2>Syntax</h2>
+<pre>f = dehoog(F, x, t, alpha, tol )
+          
+    F      = laplace-space function (string refering to an m-file),must
+             have form F(s, P1,..,P9), where s is the Laplace parameter 
+             and return column vector as result
+    t      = column vector of times for which real-space function values
+             are sought
+    alpha  = largest pole of F (default zero)
+    tol    = numerical tolerance of approaching pole (default 1e-9)
+    P1-P9  = optional parameters to be passed on to F
+    f      = vector of real-space values f(t)
+ 
+</pre>
+<h2>Description</h2>
+<pre> 
+    algorithm: de Hoog et al's quotient difference method with accelerated 
+    convergence for the continued fraction expansion
+ 
+    [de Hoog, F. R., Knight, J. H., and Stokes, A. N. (1982). An improved 
+    method for numerical inversion of Laplace transforms. S.I.A.M. J. Sci. 
+    and Stat. Comput., 3, 357-366.]
+ 
+    Modification: The time vector is split in segments of equal magnitude
+    which are inverted individually. This gives a better overall accuracy.   
+ 
+    Details: de Hoog et al's algorithm f4 with modifications (T-&gt;2*T and 
+     introduction of tol). Corrected error in formulation of z.
+ 
+    
+              Department of Hydrodynamics and Water Resources
+              Technical University of Denmark, DK-2800 Lyngby
+              email: karl@isv16.isva.dtu.dk
+ 
+    22 Nov 1996, MATLAB 5 version 27 Jun 1997 updated 1 Oct 1998
+    IF YOU PUBLISH WORK BENEFITING FROM THIS M-FILE, PLEASE CITE IT AS:
+        Hollenbeck, K. J. (1998) INVLAP.M: A matlab function for numerical 
+        inversion of Laplace transforms by the de Hoog algorithm, 
+        http://www.isva.dtu.dk/staff/karl/invlap.htm 
+ 
+    Renamed by P. Renard to be integrated in the hytool toolbox.
+ 
+</pre>
+<h2>Example</h2>
+<pre> 
+    identity function in Laplace space:
+    function F = identity(s);                    % save these two lines
+             F = 1./(s.^2);                      % ...  as "identity.m"
+    invlap('identity', [1;2;3])                  % gives [1;2;3]
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="stefhest.html">stefhest</a>
+ 
+    Published output in the Help browser
+       showdemo dehoog
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

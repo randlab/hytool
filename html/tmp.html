@@ -1,0 +1,178 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Pumping test in a double porosity aquifer</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="war_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Pumping test in a double porosity aquifer</h1><!--introduction--><p>This demonstrates the interpretation of a pumping test with the Warren and Root (1965) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">General Information:</a></li></ul></div><p>The data set for this example comes from the following reference: Moench, A. 1984. Double porosity model for a fissured groundwater reservoir with fracture skin. Water Resources Research, 20(7), 831-846. Table 2, Page 838.</p><h2 id="2">General Information:</h2><p>Fissured tertiary volcanic rocks in the vicinity of the Yucca Mountain at Nevada Test Site. One pumped well UE-25b#1 and one observation well UE-25a#1. Pumping duration was about three days.</p><p>Let us first load the data and plot the diagnostic.</p><pre class="codeinput">clear
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo war_dmo">
+Run in the Command Window</a></p>
+[t,s]=ldf(<span class="string">'war_ds1.dat'</span>);
+diagnostic(t,s)
+</pre><img vspace="5" hspace="5" src="war_dmo_01.png" alt=""> <p>We then define the values of the field parameters that are required for the interpretation:</p><pre class="codeinput">e=400;                   <span class="comment">% Estimated reservoir thickness in m</span>
+rw=0.11;                 <span class="comment">% Radius of well in m</span>
+rc=0.11;                 <span class="comment">% Radius of casing in m</span>
+Q=3.58e-2;               <span class="comment">% Flow rate m3/s</span>
+</pre><p>Once the data have been loaded and the parameter defined, we can interpret the data. We do that as usually in two steps. First the parameters p of the model are estimated with the function war_gss. Then we find an optimum fit.</p><pre class="codeinput">p=war_gss(t,s);
+p=fit(<span class="string">'war'</span>,p,t,s);
+trial(<span class="string">'war'</span>,p,t,s)
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0         166.887
+           1         120.147          936.56         3103.73
+           2         90.2622         1107.05         3279.48
+           3          20.032         261.864         7831.85
+           4          17.169          1537.2         13436.9
+           5         11.4444          829.59         3314.15
+           6         6.99002         119.415         59.8061
+           7          6.3463         52.1156          50.003
+           8          5.9563         39.4448         146.165
+           9         5.60526         33.9259         164.469
+          10         5.33282         326.393         1455.37
+          11         4.15449         202.694         367.221
+          12         2.37682         89.6147         454.105
+          13         1.43344         40.9653         297.199
+          14        0.976386         18.4723         224.053
+          15        0.970898         40.1327         522.947
+          16        0.598836         12.7197          97.715
+          17        0.541449        0.515313         15.5706
+          18        0.541295      0.00320084         2.53045
+          19        0.541295     0.000502889       0.0380495
+          20        0.541295      0.00093249       0.0116161
+Iterations terminated: relative change in SSE less than OPTIONS.TolFun
+</pre><img vspace="5" hspace="5" src="war_dmo_02.png" alt=""> <p>We can then display the result of the interpretation. Hytool find that the folowing values fort the transmissivity :</p><p>Pumping well :T = 2.1 e-3 m2/s</p><pre class="codeinput">war_rpt(p,t,s,[Q,rw],<span class="string">'Diagnostic plot'</span>)
+</pre><img vspace="5" hspace="5" src="war_dmo_03.png" alt=""> <p>The results are in reasonable agreement with the values found by Moench (1984):  T = 3.3 E-3 m2/s</p><p>We then find that the fits are rather similar and both acceptable.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Pumping test in a double porosity aquifer
+% This demonstrates the interpretation of a pumping test with the
+% Warren and Root (1965) solution
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example comes from the following reference: 
+% Moench, A. 1984. Double porosity model for a fissured groundwater 
+% reservoir with fracture skin. Water Resources Research, 20(7), 831-846.
+% Table 2, Page 838.
+
+%% General Information:
+% Fissured tertiary volcanic rocks in the vicinity of the Yucca Mountain
+% at Nevada Test Site. One pumped well UE-25b#1 and one observation
+% well UE-25a#1. Pumping duration was about three days.
+%
+% Let us first load the data and plot the diagnostic.
+
+clear
+[t,s]=ldf('war_ds1.dat');
+diagnostic(t,s)
+
+%% 
+% We then define the values of the field parameters that are required 
+% for the interpretation:
+
+e=400;                   % Estimated reservoir thickness in m
+rw=0.11;                 % Radius of well in m
+rc=0.11;                 % Radius of casing in m
+Q=3.58e-2;               % Flow rate m3/s
+ 
+%%
+% Once the data have been loaded and the parameter defined, we can
+% interpret the data. We do that as usually in two steps. First the
+% parameters p of the model are estimated with the function war_gss. Then
+% we find an optimum fit.
+%
+
+p=war_gss(t,s);
+p=fit('war',p,t,s);
+trial('war',p,t,s) 
+
+%%
+% We can then display the result of the interpretation.
+% Hytool find that the folowing values fort the transmissivity :
+%
+% Pumping well :T = 2.1 e-3 m2/s
+%
+
+war_rpt(p,t,s,[Q,rw],'Diagnostic plot')
+
+%%
+% The results are in reasonable agreement with the values found by 
+% Moench (1984):
+%  T = 3.3 E-3 m2/s
+
+%%
+% We then find that the fits are rather similar and both acceptable. 
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>

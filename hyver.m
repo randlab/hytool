@@ -1,0 +1,1 @@
+function v = hyver()%HYVER - Hytool Version %% Syntax: hyver ()%% Description:%   Internal function that returns a string containing the version %   of Hytool%% See also: hycoop%a=ver('hytool');v=a.Version;

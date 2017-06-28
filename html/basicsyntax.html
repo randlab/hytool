@@ -1,0 +1,53 @@
+<html>
+<head>
+    <title>Hytool Toolbox Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>Hydrogeological Toolbox</b></td></tr></table>
+
+<h1>Syntax convention</h1>
+
+<p>There are essentially two sets of functions available in hytool: the model
+specific functions and the general functions.
+
+<h2>Model specific functions</h2>
+
+<p>The same functionality needs  to be proposed for most of the mathematical
+models (Theis, Hantush, Gringarten, etc.). Therefore, to facilitate the
+identification of the functions we adopt function names that are made
+of a <b>suffix</b> and a <b>prefix</b>.
+
+<p>The prefix is a set of three letters that represent a certain model.
+For example, the Theis (1935) model is identified by the letters
+<i>ths</i>, the Papadopulos Cooper (1967) model for large diameter well
+is identified by <i>pcw</i>. See the <a href="listmodels.html">list of
+models</a>.</p>
+
+
+<p>The suffix is also a set of three letters that indicates what the
+function does. For example, the function that computes the drawdown is
+noted <i>dim</i>, and therefore the function that computes the Theis
+model is <i>ths_dim</i>, the one that computes the Papadopulus Cooper
+model is <i>pcw_dim</i>. See the <a href="listsuffix.html">list of
+suffix</a> to know the correspondence between the names of the
+functionalities.
+
+
+<h2>General functions</h2>
+
+<p>They do not depend on a specific model. Their name indicates
+   what the function does. For example, the function
+   <a href="diagnostic.html">diagnostic</a> creates a diagnostic plot.
+</p>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr><td
+valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philippe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="file:license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="file:acknowledgments.html">Acknowledgments</a></p>
+</body>
+</html>

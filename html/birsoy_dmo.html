@@ -1,0 +1,314 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Reduced time for multiple rate tests</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="birsoy_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Reduced time for multiple rate tests</h1><!--introduction--><p>This demonstrates the interpretation of a step drawdown test in a fully penetrated confined aquifer (variable rate test).</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#6">BIRSOY_DEMO2 - Synthetic example showing the interest of Birsoy time</a></li></ul></div><p>The data set for this example comes from the following reference: Data set : Kruseman and de Ridder (1994) pp. 185 The data are collected in a piezometer located at 5m from the pumping well.</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'tmr_ds1.dat'</span>);
+q=[30*60,500/24/60/60;
+   80*60,700/24/60/60;
+   130*60,600/24/60/60];
+</pre><p>Once the data have been loaded , we can interpret the data with the birsoy time and We estimate the p parameter with the function ths_gss and we find an optimum fit.</p><pre class="codeinput">[tb,sb]=birsoy_time(t,s,q);
+p=ths_gss(tb,sb);
+p=fit(<span class="string">'ths'</span>,p,tb,sb);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0          14.522
+           1         14.5209       0.0747165       0.0128682
+           2         14.5206      0.00632047      0.00930169
+           3         14.5206     4.95682e-05     0.000755248
+           4         14.5206      3.0909e-08     6.28394e-06
+Iterations terminated: relative change in SSE less than OPTIONS.TolFun
+</pre><p>We can then display the result of the interpretation. Hytool find that the folowing values fort the transmissivity and storativity:</p><p>T= 1.2 e-3 m2/s and S= 9.8 e-4.</p><pre class="codeinput">ths_rpt(p,tb,sb,[1;5],<span class="string">'Kruseman example - automatic fit'</span>);
+</pre><img vspace="5" hspace="5" src="birsoy_dmo_01.png" alt=""> <p>The results are in reasonable agreement with the values found by Kruseman and de Ridder (1994): T = 102 m2/d = 1.2 e-3 m2/s and S = 9.6 e-4.</p><p>We then find that the fits are rather similar and both acceptable.</p><h2 id="6">BIRSOY_DEMO2 - Synthetic example showing the interest of Birsoy time</h2><pre class="language-matlab">Syntax : birsoy_demo2
+</pre><pre class="language-matlab">This <span class="string">example</span> <span class="string">builds</span> <span class="string">a</span> <span class="string">synthetic</span> <span class="string">data</span> <span class="string">set</span> <span class="string">for</span> <span class="string">a</span> <span class="string">variable</span> <span class="string">rate</span> <span class="string">test</span>
+(6 different pumping rates) in <span class="string">a</span> <span class="string">double</span> <span class="string">porosity</span> <span class="string">aquifer.</span> <span class="string">The</span> <span class="string">data</span> <span class="string">set</span>
+is <span class="string">made</span> <span class="string">with</span> <span class="string">the</span> <span class="string">Warren</span> <span class="string">and</span> <span class="string">Root</span> <span class="string">double</span> <span class="string">porosity</span> <span class="string">model.</span> <span class="string">A</span> <span class="string">random</span> <span class="string">noise</span>
+proportional <span class="string">to</span> <span class="string">the</span> <span class="string">signal</span> <span class="string">is</span> <span class="string">added.</span>
+</pre><pre class="language-matlab">In <span class="string">figure</span> <span class="string">1</span>, the <span class="string">synthetic</span> <span class="string">drawdown</span> <span class="string">computed</span> <span class="string">for</span> <span class="string">that</span> <span class="string">situation</span> <span class="string">is</span>
+shown <span class="string">as</span> <span class="string">well</span> <span class="string">as</span> <span class="string">its</span> <span class="string">derivative</span> <span class="string">in</span> <span class="string">log-log</span> <span class="string">scale.</span> <span class="string">This</span> <span class="string">shows</span> <span class="string">that</span> <span class="string">the</span>
+diagnostic <span class="string">plot</span> <span class="string">cannot</span> <span class="string">be</span> <span class="string">used</span> <span class="string">to</span> <span class="string">identify</span> <span class="string">the</span> <span class="string">double</span> <span class="string">porosity</span> <span class="string">model</span>
+when <span class="string">the</span> <span class="string">pumping</span> <span class="string">rates</span> <span class="string">are</span> <span class="string">variable.</span>
+</pre><pre class="language-matlab">We <span class="string">then</span> <span class="string">use</span> <span class="string">the</span> <span class="string">birsoy_time</span> <span class="string">deconvolution</span> <span class="string">method</span>, to <span class="string">obtain</span> <span class="string">the</span>
+equivalent <span class="string">time</span> <span class="string">and</span> <span class="string">drawdown</span> <span class="string">with</span> <span class="string">Birsoy</span> <span class="string">and</span> <span class="string">Summers</span> <span class="string">(1981)</span> <span class="string">technique.</span>
+These <span class="string">data</span> <span class="string">are</span> <span class="string">then</span> <span class="string">plotted</span> <span class="string">in</span> <span class="string">a</span> <span class="string">diagnostic</span> <span class="string">plot</span> <span class="string">in</span> <span class="string">figure</span> <span class="string">2.</span> <span class="string">It</span> <span class="string">is</span>
+clear <span class="string">that</span> <span class="string">the</span> <span class="string">deconvolution</span> <span class="string">allows</span> <span class="string">to</span> <span class="string">identify</span> <span class="string">the</span> <span class="string">double</span> <span class="string">porosity</span>
+model.
+</pre><pre class="language-matlab">In <span class="string">addition</span> <span class="string">a</span> <span class="string">double</span> <span class="string">porosity</span> <span class="string">model</span> <span class="string">is</span> <span class="string">adjusted</span> <span class="string">to</span> <span class="string">the</span> <span class="string">deconvoluted</span>
+data <span class="string">to</span> <span class="string">identify</span> <span class="string">the</span> <span class="string">values</span> <span class="string">of</span> <span class="string">the</span> <span class="string">parameters</span> <span class="string">and</span> <span class="string">displayed</span> <span class="string">as</span> <span class="string">well</span> <span class="string">in</span>
+figure <span class="string">2.</span>
+</pre><pre class="language-matlab">Finally, using <span class="string">the</span> <span class="string">superposition</span> <span class="string">principle</span>, the <span class="string">initial</span> <span class="string">signal</span> <span class="string">is</span>
+reconstructed <span class="string">with</span> <span class="string">the</span> <span class="string">fitted</span> <span class="string">parameters</span> <span class="string">and</span> <span class="string">compared</span> <span class="string">to</span> <span class="string">the</span> <span class="string">original</span>
+data <span class="string">set</span> <span class="string">in</span> <span class="string">figure</span> <span class="string">3.</span>
+</pre><pre class="language-matlab">This <span class="string">shows</span> <span class="string">that</span> <span class="string">the</span> <span class="string">deconvolution</span> <span class="string">method</span> <span class="string">works</span> <span class="string">pretty</span> <span class="string">well</span> <span class="string">in</span> <span class="string">those</span>
+situations. The estimated <span class="string">parameters</span> <span class="string">are</span> <span class="string">very</span> <span class="string">close</span> <span class="string">to</span> <span class="string">the</span> <span class="string">original</span> <span class="string">one</span>
+and <span class="string">the</span> <span class="string">drawdown</span> <span class="string">curve</span> <span class="string">is</span> <span class="string">well</span> <span class="string">reproduced.</span>
+</pre><pre class="codeinput">tfin=5e4;             <span class="comment">% end of the synthetic data</span>
+p=[160,20,200,400];   <span class="comment">% reference parameters to build the data set</span>
+
+q=[100,5.3e-3;        <span class="comment">% Pumping periods</span>
+   200,6.3e-3;
+   500,8.3e-3;
+   1000,1.94e-2;
+   2000,1.76e-2;
+   tfin,1.55e-2];
+
+t=[logspace(1,log10(tfin),80)']; <span class="comment">% time steps</span>
+
+nbpumpingperiod=size(q,1);                 <span class="comment">% build manually the superposition of</span>
+begintime=[0;q(1:end-1,1)];                <span class="comment">% the double porosity model</span>
+pumpingrates=[q(1,2);diff(q(:,2))];
+s=zeros(size(t));
+<span class="keyword">for</span> i=1:nbpumpingperiod
+    is=find(t&gt;begintime(i));
+    s(is)=s(is)+war_dim([p(1)*pumpingrates(i),p(2:end)],t(is)-begintime(i));
+<span class="keyword">end</span>
+s=s.*(1+rand(size(s))*.05);
+
+figure(1)                                 <span class="comment">% plot the synthetic data</span>
+clf
+plot(t,s,<span class="string">'o-'</span>)
+xlabel(<span class="string">'time'</span>)
+ylabel(<span class="string">'drawdown'</span>)
+diagnostic(t,s)
+
+figure(2)
+clf
+[tb, sb] = birsoy_time( t, s, q);         <span class="comment">% compute the deconvolution (Birsoy time)</span>
+diagnostic(tb,sb)                         <span class="comment">% show the diagnostic plot</span>
+p=war_gss(tb,sb);                         <span class="comment">% fit a double porosity model on it</span>
+p=fit(<span class="string">'war'</span>,p,tb,sb);
+sc=war_dim(p,tb);                         <span class="comment">% compute the corresponding solution</span>
+hold <span class="string">on</span>
+plot(tb,sc)                               <span class="comment">% plot it on top of the diagnostic plot</span>
+[td,sd]=ldiffs(tb,sc,30);
+plot(td,sd)                               <span class="comment">% as well as its derivative</span>
+
+figure(3)
+clf
+sc=zeros(size(t));                        <span class="comment">% For comparison, computes the synthetic</span>
+<span class="keyword">for</span> i=1:nbpumpingperiod                   <span class="comment">% signal with the fitted parameter</span>
+    is=find(t&gt;begintime(i));
+    sc(is)=sc(is)+war_dim([p(1)*pumpingrates(i),p(2:end)],t(is)-begintime(i));
+<span class="keyword">end</span>
+diagnostic(t,s)
+hold <span class="string">on</span>
+loglog(t,sc)
+[td,sd]=ldiffs(t,sc,30);
+plot(td,sd)
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0         24774.8
+           1         7377.03         2368.37          129.22
+           2          1620.7         648.481         153.241
+           3         705.523         112.598         64.4442
+           4         677.926         2.68713         6.45887
+           5         677.909     0.000439167        0.178066
+           6         677.909     4.81846e-06       0.0121998
+           7         677.909       0.0101642     0.000290069
+Iterations terminated: relative change in SSE less than OPTIONS.TolFun
+</pre><img vspace="5" hspace="5" src="birsoy_dmo_02.png" alt=""> <img vspace="5" hspace="5" src="birsoy_dmo_03.png" alt=""> <img vspace="5" hspace="5" src="birsoy_dmo_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Reduced time for multiple rate tests
+% This demonstrates the interpretation of a step drawdown test in a fully 
+% penetrated confined aquifer (variable rate test).
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example comes from the following reference: 
+% Data set : Kruseman and de Ridder (1994) pp. 185
+% The data are collected in a piezometer located at 5m from the pumping
+% well.
+%
+% Let us first load the data and plot them.
+
+[t,s]=ldf('tmr_ds1.dat');
+q=[30*60,500/24/60/60;
+   80*60,700/24/60/60;
+   130*60,600/24/60/60];
+
+%%
+% Once the data have been loaded , we can interpret the data with the 
+% birsoy time and We estimate the p parameter with the function ths_gss
+% and we find an optimum fit.
+
+[tb,sb]=birsoy_time(t,s,q);
+p=ths_gss(tb,sb);
+p=fit('ths',p,tb,sb);
+
+%%
+% We can then display the result of the interpretation.
+% Hytool find that the folowing values fort the transmissivity and
+% storativity:
+%
+% T= 1.2 e-3 m2/s and S= 9.8 e-4.
+
+ths_rpt(p,tb,sb,[1;5],'Kruseman example - automatic fit');
+
+%%
+% The results are in reasonable agreement with the values found by 
+% Kruseman and de Ridder (1994):
+% T = 102 m2/d = 1.2 e-3 m2/s and S = 9.6 e-4.
+
+%%
+% We then find that the fits are rather similar and both acceptable. 
+
+
+
+%% BIRSOY_DEMO2 - Synthetic example showing the interest of Birsoy time 
+%
+%   Syntax : birsoy_demo2
+% 
+%   This example builds a synthetic data set for a variable rate test 
+%   (6 different pumping rates) in a double porosity aquifer. The data set
+%   is made with the Warren and Root double porosity model. A random noise
+%   proportional to the signal is added.
+% 
+%   In figure 1, the synthetic drawdown computed for that situation is
+%   shown as well as its derivative in log-log scale. This shows that the
+%   diagnostic plot cannot be used to identify the double porosity model
+%   when the pumping rates are variable.
+%
+%   We then use the birsoy_time deconvolution method, to obtain the
+%   equivalent time and drawdown with Birsoy and Summers (1981) technique.
+%   These data are then plotted in a diagnostic plot in figure 2. It is
+%   clear that the deconvolution allows to identify the double porosity
+%   model. 
+%
+%   In addition a double porosity model is adjusted to the deconvoluted
+%   data to identify the values of the parameters and displayed as well in
+%   figure 2.
+%
+%   Finally, using the superposition principle, the initial signal is
+%   reconstructed with the fitted parameters and compared to the original
+%   data set in figure 3. 
+% 
+%   This shows that the deconvolution method works pretty well in those
+%   situations. The estimated parameters are very close to the original one
+%   and the drawdown curve is well reproduced.
+%
+
+
+tfin=5e4;             % end of the synthetic data
+p=[160,20,200,400];   % reference parameters to build the data set
+
+q=[100,5.3e-3;        % Pumping periods
+   200,6.3e-3; 
+   500,8.3e-3;
+   1000,1.94e-2; 
+   2000,1.76e-2; 
+   tfin,1.55e-2];
+
+t=[logspace(1,log10(tfin),80)']; % time steps
+
+nbpumpingperiod=size(q,1);                 % build manually the superposition of 
+begintime=[0;q(1:end-1,1)];                % the double porosity model
+pumpingrates=[q(1,2);diff(q(:,2))];
+s=zeros(size(t));
+for i=1:nbpumpingperiod
+    is=find(t>begintime(i));
+    s(is)=s(is)+war_dim([p(1)*pumpingrates(i),p(2:end)],t(is)-begintime(i));
+end
+s=s.*(1+rand(size(s))*.05);
+
+figure(1)                                 % plot the synthetic data
+clf
+plot(t,s,'o-')
+xlabel('time')
+ylabel('drawdown')
+diagnostic(t,s)
+
+figure(2)
+clf
+[tb, sb] = birsoy_time( t, s, q);         % compute the deconvolution (Birsoy time)
+diagnostic(tb,sb)                         % show the diagnostic plot
+p=war_gss(tb,sb);                         % fit a double porosity model on it
+p=fit('war',p,tb,sb);                         
+sc=war_dim(p,tb);                         % compute the corresponding solution
+hold on
+plot(tb,sc)                               % plot it on top of the diagnostic plot
+[td,sd]=ldiffs(tb,sc,30);                 
+plot(td,sd)                               % as well as its derivative
+
+figure(3)                             
+clf
+sc=zeros(size(t));                        % For comparison, computes the synthetic
+for i=1:nbpumpingperiod                   % signal with the fitted parameter
+    is=find(t>begintime(i));                
+    sc(is)=sc(is)+war_dim([p(1)*pumpingrates(i),p(2:end)],t(is)-begintime(i));
+end
+diagnostic(t,s)
+hold on
+loglog(t,sc)
+[td,sd]=ldiffs(t,sc,30);
+plot(td,sd)
+
+##### SOURCE END #####
+--></body></html>

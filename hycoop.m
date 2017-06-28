@@ -1,0 +1,1 @@
+function c = hycoop()%HYCOOP - Hytool Copyright %% Syntax: hycoop ()%% Description:%   Internal function that returns a string containing the text for the %   copyrigh used for every rpt functions.%% See also: hyver%c=sprintf('HYTOOL v %s',hyver);

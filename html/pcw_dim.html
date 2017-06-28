@@ -1,0 +1,74 @@
+<html>
+<head>
+<title>pcw_dim :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>pcw_dim</h1>
+<p> Papadopulos Cooper (1967) solution </p>
+ 
+<h2>Syntax</h2>
+<pre>[s,d] = pcw_dim( p, t)
+ 
+    p(1) = a  = slope of late time straight line
+    p(2) = t0 = intercept of late time straight line
+    p(3) = Cd = dimensionless well-bore storage coefficient
+ 
+    t = time
+    s = drawdonw
+    d = derivative
+   
+</pre>
+<h2>Description</h2>
+<pre>
+     Conputes the drawdown as a function of time with the Papadopulos and 
+     Cooper (1967) solution for a pumping test in a large diameter well.
+     The aquifer is confined and homogeneous. The well is fully penetrating 
+     and the pumping rate constant.   
+  
+  
+     The solution is parametrized as a function of a, to and Cd.
+ 
+     The dimensionless well bore storage coefficient is:
+ 
+      Cd = rc^2/(2 rw^2 S)
+ 
+     a and to are the slope and time intercept of the late time straight
+     line asymptotes.
+ 
+      a = 0.183 Q /T
+      t0 = 2.25 T t / r2 S
+ 
+     NB: Note that in the original publication of Cooper et al.
+     The dimensionless parameter was alpha, it is related to 
+     Cd by: alpha = 1 / (2 Cd)
+  
+     Reference: Papadopulos, I.S., and H.H.J. Cooper. 1967. Drawdown in a
+     well of large diameter. Water Resources Research 3, no. 1: 241-244. 
+ 
+</pre>
+<h2>Example</h2>
+<pre>
+    s=pcw_dim(p,t)
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="pcw_dmo.html">pcw_dmo</a>, <a href="pcw_rpt.html">pcw_rpt</a>, <a href="pcw_gss.html">pcw_gss</a>
+ 
+    Published output in the Help browser
+       showdemo pcw_dim
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

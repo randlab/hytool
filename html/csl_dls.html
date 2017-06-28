@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>csl_dls :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>csl_dls</h1>
+<p> Cooper et al. (1967) dimensionless solution for a slug test</p>
+ 
+<h2>Syntax</h2>
+<pre>sd = csl_dls( cd, t )
+ 
+    cd = Dimensionless well bore storage 
+    t  = Dimensionless time  = td / cd = 2 T t / rc^2
+ 
+</pre>
+<h2>Description</h2>
+<pre>
+     Conputes the normalized drawdown (Delta h / Delta h0) as a function of
+     dimensionless time with the Cooper et al. (1967) solution for a slug test in a
+     homogeneous confined aquifer. The well is fully penetrating and the
+     slug injection or withdrawal is instantaneous.   
+ 
+     The dimensionless well bore storage coefficient is:
+ 
+     Cd = rc^2/(2 rw^2 S)
+ 
+     Reference: Cooper, H.H.J., J.D. Bredehoeft, and I.S. Papadopulos.
+     1967. Response of a finite-diameter well to an instantaneous charge of
+     water. Water Resources Research 3, no. 1: 263-269. 
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="csl_lap.html">csl_lap</a>, <a href="csl_drw.html">csl_drw</a>
+    Published output in the Help browser
+       showdemo csl_dls
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

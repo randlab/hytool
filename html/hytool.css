@@ -1,0 +1,75 @@
+BODY{
+  background: #FFFFFF;
+  font-family: Trebuchet, Arial, sans-serif;
+  color: black
+}
+
+P{
+  font-family: Arial, Verdana, Helvetica ; 
+}
+
+TD{
+  font-family: Arial, Verdana, Helvetica;
+}
+
+
+H1{
+  color: #990000;
+  font-size: x-large;
+}
+
+H2{ 
+  color: #000066;
+  font-size: medium;
+}
+
+H3{
+  font-family: Arial, Verdana, Helvetica;
+  color: #990099;
+  font-size: medium;
+  margin-left: +2%;
+}
+
+PRE{
+  font-family: Courrier new, Serif;
+  color:  black;
+}
+
+EM{
+  color:blue;
+  background: yellow
+}
+
+STRONG{
+  text-transform: uppercase; font-weight: bold
+}
+
+A{
+  font-family: Arial, Verdana, Helvetica;
+  color: #000066;
+}
+A.header{
+  font-family: Arial, Verdana, Helvetica; 
+  font-size: 18px;
+}
+
+A.table {
+  font-family: Arial, Verdana, Helvetica;
+}
+
+A.event{
+  font-family: Arial, Verdana, Helvetica; 
+  color: #FFFFFF;
+}
+
+a:link {color: #0000FF; text-decoration:underline; }
+a:visited {color: #0000FF; text-decoration:underline;}
+a:hover {color: #0000FF; text-decoration:underline;}
+a:active {color: #0000FF; text-decoration:underline; }
+p.copy a {font-weight:normal;}
+
+		/* Text Classes */
+
+p.copy 		{ margin:0; padding:2px; background-color:#FFFFFF; }
+div.expander dd {margin-top:-1ex; margin-left:3ex;}
+table {border-width:0;}

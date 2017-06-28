@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>pca_dim :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>pca_dim</h1>
+<p> PapadopulosCooper (1967) solution in the aquifer</p>
+ 
+<h2>Syntax</h2>
+<pre>s = pca_dim(p,t)
+ 
+    p(1) = a  = slope of late time straight line
+    p(2) = t0 = intercept of late time straight line
+ 
+    t = time
+    s = drawdown
+ 
+</pre>
+<h2>Description</h2>
+<pre>
+    Computes the drawdown for a constant rate pumping test in a 
+    large diameter. The aquifer is confined and homogeneous.
+    It is assumed that there is no skin effect and that there
+    is a single and constant storativity coefficient for the aquifer.
+ 
+</pre>
+<h2>Example</h2>
+<pre>
+    s=pca_dim(p,t);
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="pca_dmo.html">pca_dmo</a>, <a href="pca_pre.html">pca_pre</a>, <a href="pca_rpt.html">pca_rpt</a>, <a href="pca_gss.html">pca_gss</a>
+ 
+    Published output in the Help browser
+       showdemo pca_dim
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

@@ -1,0 +1,153 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Theis solution for Multiple rate tests.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="tmr_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Theis solution for Multiple rate tests.</h1><!--introduction--><p>This demonstrates the interpretation of the drawdown at time t for multiple rate tests without accounting for quadratic head losses with the Theis (1935) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example comes from the following reference: Kruseman and de Ridder (1994), Analysis and Evaluation of Pumping Test Data. International Institute for Land Reclamation and Improvement, Wageningen. The Netherlands. 377pp.</p><p>pp. 185: Step drawdown test in a fully penetrated confined aquifer.</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'tmr_ds1.dat'</span>); clf; plot(t,s,<span class="string">'o'</span>);
+</pre><img vspace="5" hspace="5" src="tmr_dmo_01.png" alt=""> <p>We then define the values of the parameters that are required for the interpretation:</p><p>The piezometer is located at 5m from the pumping well. Three rate tests [t(min);q(m3/d)]:[30,500;80,100;130,800];</p><pre class="codeinput">q=[30*60,500/24/60/60;80*60,700/24/60/60;130*60,600/24/60/60];
+tmr_pre(q);
+</pre><p>Once the data have been loaded and the parameter defined, we can interpret the data. We do that as usually in two steps. First the parameters p of the model are estimated with the function tmr_gss. Then we an optimum fit.</p><pre class="codeinput">p=tmr_gss(t,s);
+p=fit(<span class="string">'tmr'</span>,p,t,s);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0      0.00811037
+           1     0.000902437     0.000282526         1.86782
+           2     0.000726985     0.000492999         1.24983
+           3      0.00072431     3.44809e-06         0.12262
+           4      0.00072431     3.07702e-10      0.00117865
+           5      0.00072431     9.11823e-14     1.22005e-06
+Iterations terminated: relative norm of the current step is less than OPTIONS.TolX
+</pre><p>We can then display the result of the interpretation. Hytool find that the folowing values fort the transmissivity and storativity:</p><p>T = 1.2 e-3 m2/s and S = 9.9 e-4</p><pre class="codeinput">tmr_rpt(p,t,s,5,<span class="string">'Kruseman and de Ridder - automatic fit'</span>)
+</pre><img vspace="5" hspace="5" src="tmr_dmo_02.png" alt=""> <p>The results are in reasonable agreement with the values found by Kruseman and de Ridder (1994): T = 102 m2/d = 1.2 e-3 m2/s S = 9.6 e-4</p><p>We then find that the fits are rather similar and both acceptable.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Theis solution for Multiple rate tests.
+% This demonstrates the interpretation of the drawdown at time t 
+% for multiple rate tests without accounting for quadratic head losses
+% with the Theis (1935) solution
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example comes from the following reference: 
+% Kruseman and de Ridder (1994), Analysis and Evaluation of Pumping Test
+% Data. International Institute for Land Reclamation and Improvement,
+% Wageningen. The Netherlands. 377pp.
+%
+% pp. 185: Step drawdown test in a fully penetrated confined aquifer.
+%
+% Let us first load the data and plot them.
+
+[t,s]=ldf('tmr_ds1.dat'); clf; plot(t,s,'o');
+ 
+%% 
+% We then define the values of the parameters that are required for the
+% interpretation:
+%
+% The piezometer is located at 5m from the pumping well.
+% Three rate tests [t(min);q(m3/d)]:[30,500;80,100;130,800];
+
+q=[30*60,500/24/60/60;80*60,700/24/60/60;130*60,600/24/60/60];
+tmr_pre(q);
+
+%%
+% Once the data have been loaded and the parameter defined, we can
+% interpret the data. We do that as usually in two steps. First the
+% parameters p of the model are estimated with the function tmr_gss. Then
+% we an optimum fit.
+%
+
+p=tmr_gss(t,s);
+p=fit('tmr',p,t,s);
+
+%%
+% We can then display the result of the interpretation.
+% Hytool find that the folowing values fort the transmissivity and
+% storativity:
+%
+% T = 1.2 e-3 m2/s and S = 9.9 e-4
+%
+
+tmr_rpt(p,t,s,5,'Kruseman and de Ridder - automatic fit')
+
+%%
+% The results are in reasonable agreement with the values found by 
+% Kruseman and de Ridder (1994):
+% T = 102 m2/d = 1.2 e-3 m2/s
+% S = 9.6 e-4
+
+%%
+% We then find that the fits are rather similar and both acceptable. 
+
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>

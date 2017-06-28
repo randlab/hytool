@@ -1,0 +1,67 @@
+<html>
+<head>
+<title>igmeread :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>igmeread</h1>
+<p> Import IGME csv file from the low permeability testing unit.</p>
+ 
+<h2>Syntax</h2>
+<pre>igmeread(input,location,jpgfile,plotq)
+ 
+    MANDATORY ARGUMENT:
+    input    = base name for the csv file 
+ 
+    OPTIONAL ARGUMENTS:
+    location = text that appears in the title of the figure 
+    jpgfile  = name of the JPEG file in which the figure is saved 
+    plotq    = allows to decide wether the figure must contain a plot of
+               the flow rates
+    plotq    = 0 - no flow rate is displayed
+    plotq    = 1 - the flow rate is displayed
+ 
+</pre>
+<h2>Description</h2>
+<pre>
+    The function allows to read the csv file that is produced by the data
+    acquisition of the hydrogeological testing unit of IGME. The result of
+    the function are two plots of the data as a function of time, either 
+    in date and time units, or in seconds since the begininig of the 
+    recording.
+  
+    The most important data (time, head in the test section, flow rate,
+    dates) are exported to the matlab workspace in the vectors t, h, q,
+    and d. Finally a JPEG figure is automatically produced for reporting. 
+ 
+    Note that only the first argument in the function call is required, the
+    three other arguments are optionnals.
+ 
+</pre>
+<h2>Example</h2>
+<pre>
+    igmeread( 'cv2s1p1' )
+    igmeread( 'cv2s1p1', 'Cadalso de los Vidrios' )
+    igmeread( 'cv2s1p1', 'Cadalso de los Vidrios','cv2.jpg', 1 ) 
+    igmeread( 'cv2s1p1', 'Cadalso', 'cv2s2p1.jpg', 0);
+ 
+</pre>
+<h2>See Also</h2>
+<pre><a href="ldf.html">ldf</a>, <a href="csvread.html">csvread</a>
+    Published output in the Help browser
+       showdemo igmeread
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

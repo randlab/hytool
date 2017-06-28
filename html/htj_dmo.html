@@ -1,0 +1,163 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Confined aquifer with leakage</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="htj_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Confined aquifer with leakage</h1><!--introduction--><p>This demonstrates the interpretation of a pumping test in confined aquifer with leakage with the% hantush and Jacob (1955) model</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example comes from the following reference: Hall, P. Water well and aquifer test analysis 1996, Water Resources Publications, LLC, 412 pp. Example  Fig 11.14 p.267-268</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'htj_ds1.dat'</span>);
+diagnostic(t,s)
+</pre><img vspace="5" hspace="5" src="htj_dmo_01.png" alt=""> <p>We then define the values of the parameters that are required for the interpretation:</p><pre class="language-matlab">t = measured time
+s = measured drawdown
+d(1) = Q =6.309 e-3 m3/s    <span class="comment">% Pumping rate</span>
+d(2) = r =3.048 m           <span class="comment">% Distance to the pumping well</span>
+d(3) = e'=6.096 m           <span class="comment">% Thickness of the aquitard</span>
+</pre><p>Once the data have been loaded and the parameter defined, we can interpret the data. We do that as usually in two steps. First the parameters p of the model are estimated with the function htj_gss. Then we used to find an optimum fit.</p><pre class="codeinput">p0=htj_gss(t,s);  <span class="comment">% The initial guess is incorrect</span>
+trial(<span class="string">'htj'</span>,p0,t,s)
+p=fit(<span class="string">'htj'</span>,p0,t,s);
+</pre><pre class="codeoutput"> 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0        0.251771
+           1       0.0873915        0.480908        0.242917
+           2       0.0823017       0.0188208       0.0525478
+           3        0.082299      9.0647e-06       0.0010401
+           4        0.082299     2.15662e-09     2.82403e-06
+Iterations terminated: relative change in SSE less than OPTIONS.TolFun
+ 
+                                     Norm of         Norm of
+   Iteration             SSE        Gradient           Step 
+  -----------------------------------------------------------
+           0        0.772752
+           1         0.18116         93.2499       0.0955832
+           2         0.13279           33.25        0.134556
+           3        0.132252        0.349418        0.014008
+           4        0.132252     0.000265487     0.000147928
+           5        0.132252     6.45377e-05     8.93205e-05
+           6        0.132252       0.0101117     9.84102e-06
+           7        0.132252       0.0268441     8.91998e-09
+Iterations terminated: relative norm of the current step is less than OPTIONS.TolX
+</pre><img vspace="5" hspace="5" src="htj_dmo_02.png" alt=""> <p>We can then display the result of the interpretation. Hytool find that the folowing values for the transmissivity and storativity:</p><p>T: 1.4e-004 m2/s and S: 1 e-04</p><pre class="codeinput">htj_rpt(p,t,s,[6.309e-3,3.048,6.096],<span class="string">'Hall example - automatic fit'</span>)
+</pre><img vspace="5" hspace="5" src="htj_dmo_03.png" alt=""> <p>The results are in reasonable agreement with the values found by Hall (1996): T = 7.77 e-5 m2/s S = 5.0193 e-4</p><p>We then find that the fits are rather similar and both acceptable.</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Confined aquifer with leakage
+% This demonstrates the interpretation of a pumping test in confined 
+% aquifer with leakage with the% hantush and Jacob (1955) model
+%
+% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+
+%%
+% The data set for this example comes from the following reference: 
+% Hall, P. Water well and aquifer test analysis 1996, Water Resources
+% Publications, LLC, 412 pp. Example  Fig 11.14 p.267-268
+%
+% Let us first load the data and plot them.
+
+[t,s]=ldf('htj_ds1.dat');
+diagnostic(t,s)
+
+%% 
+% We then define the values of the parameters that are required for the
+% interpretation:
+%
+%   t = measured time
+%   s = measured drawdown
+%   d(1) = Q =6.309 e-3 m3/s    % Pumping rate
+%   d(2) = r =3.048 m           % Distance to the pumping well
+%   d(3) = e'=6.096 m           % Thickness of the aquitard
+
+%%
+% Once the data have been loaded and the parameter defined, we can
+% interpret the data. We do that as usually in two steps. First the
+% parameters p of the model are estimated with the function htj_gss. Then
+% we used to find an optimum fit.
+%
+
+p0=htj_gss(t,s);  % The initial guess is incorrect
+trial('htj',p0,t,s) 
+p=fit('htj',p0,t,s);
+
+%%
+% We can then display the result of the interpretation.
+% Hytool find that the folowing values for the transmissivity and
+% storativity:
+%
+% T: 1.4e-004 m2/s and S: 1 e-04
+%
+
+htj_rpt(p,t,s,[6.309e-3,3.048,6.096],'Hall example - automatic fit')
+
+%%
+% The results are in reasonable agreement with the values found by Hall
+% (1996):
+% T = 7.77 e-5 m2/s
+% S = 5.0193 e-4
+
+%%
+% We then find that the fits are rather similar and both acceptable.
+
+
+##### SOURCE END #####
+--></body></html>
