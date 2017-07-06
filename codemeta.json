@@ -1,0 +1,17 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+
+  ],
+  "identifier": "",
+  "codeRepository": "https://github.com/UniNE-CHYN/hytool",
+  "datePublished": "2017-07-06",
+  "dateModified": "2017-07-06",
+  "dateCreated": "2017-07-06",
+  "description": "Hytool is a matlab toolbox for the interpretation of hydraulic tests in wells. The toolbox contains analytical solutions used to describe groundwater flow around wells, and functions for importing, displaying, and fitting a model to the data. ",
+  "keywords": "well-testing, pumping-test, hydrogeology, data-analysis, matlab",
+  "license": "MIT",
+  "title": "hytool",
+  "version": "2.05"
+}
