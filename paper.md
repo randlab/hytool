@@ -27,6 +27,6 @@ The structure of the code is modular and allows adding easily new solutions when
 
 In addition to the analytical solution, hytool contains a set of functions to help the user load and manipulate the hydraulic test data, construct diagnostic plots [@renard2009], fit automatically a model, and report the results.
 
-The user documentation is included within the toolbox and available as internal help within matlab. The help contains a description of each individual function plus a series of examples including data sets that are used to demonstrate how hytool can be used in practice. This toolbox has been used in several research [@mejias2009] project as well as for teaching purposes in the University of Neuchâtel.  
+The user documentation is included within the toolbox and available as internal help within matlab. The help contains a description of each individual function plus a series of examples including data sets that are used to demonstrate how hytool can be used in practice. This toolbox has been used in several research projects [@mejias2009] as well as for teaching purposes in the University of Neuchâtel.  
 
 # References
