@@ -2,7 +2,8 @@
 % This is a demonstration of the interpretation of Step-drawdown test with
 % Eden and Hazel (1973) method 
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %% Load the data
 % The data set for this example where taken from: 

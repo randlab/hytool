@@ -5,7 +5,8 @@
 % of the Theis (1935) solution for late time. The Theis solution should be
 % prefered in general.
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %% Load the data
 % The data set for this example has been typed from: 

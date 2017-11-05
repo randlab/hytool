@@ -2,7 +2,8 @@
 % In this example, we show how to use the thiem function to 
 % compute the transmissivity with the Thiem (1906) solution.
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %% Data set
 % The data set for this example comes from the following reference: 

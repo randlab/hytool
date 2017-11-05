@@ -2,7 +2,8 @@
 % This is a demo of the interpretation of an intereference pumping test 
 % with the Agarwal (1970) solution (skin + well capacity).
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %% Load the data
 % The data for this example has been typed from: 

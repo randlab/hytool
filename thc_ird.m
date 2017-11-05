@@ -12,7 +12,6 @@ function [rd] = thc_ird( frd )
 % See also:
 %
 
-
 if frd < 2.71828182850322
     disp('Problem in the inversion of Rd: thc_ird')
     rd=1.000001;

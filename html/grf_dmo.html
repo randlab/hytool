@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>General Radial Flow model interpretation</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="grf_dmo.m"><style type="text/css">
+      --><title>General Radial Flow model interpretation</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-05"><meta name="DC.source" content="grf_dmo.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>General Radial Flow model interpretation</h1><!--introduction--><p>This is a demonstration of the interpretation of a pumping test with the Barker (1988) solution.</p><p>Copyright 1998-2007 - Philippe Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">FIRST EXAMPLE</a></li><li><a href="#8">SECOND EXAMPLE</a></li><li><a href="#13">THIRD example for the GRF model (Barker, 1988)</a></li><li><a href="#14">Load the data and plot the diagnostic</a></li><li><a href="#15">Prepare the model and fit it to the data</a></li><li><a href="#16">Automatic fit and final figure</a></li><li><a href="#17">Demo example for the grf model (Barker, 1988)</a></li><li><a href="#18">Load the data and plot the diagnostic</a></li><li><a href="#19">Prepare the model and check the preliminary fit to the data</a></li><li><a href="#20">Automatic fit and final figure</a></li></ul></div><p>The data set for this example comes from the following reference: G. Lods and P. Gouze (2004) WTFM, software for well test analysis in fractured media combining fractional flow with double porosity approaches. Computers and Geosciences. Vol 30. pp. 937-947 Example CS2 and CS3, page 943-944</p><p>This demo is composed by two example: grf_ds1.dat : time in s,  drawdown in m in the well Sha1B grf_ds2.dat : time in s,  drawdown in m in the well Sha1BT</p><h2 id="3">FIRST EXAMPLE</h2><p>Let us first load the data and plot them.</p><pre class="codeinput">clear; clf; clc
+  </style></head><body><div class="content"><h1>General Radial Flow model interpretation</h1><!--introduction--><p>This is a demonstration of the interpretation of a pumping test with the Barker (1988) solution.</p><p>MIT License Copyright (c) 2017 Philippe Renard - University of Neuch&acirc;tel (CHYN)</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">FIRST EXAMPLE</a></li><li><a href="#8">SECOND EXAMPLE</a></li><li><a href="#13">THIRD example for the GRF model (Barker, 1988)</a></li><li><a href="#14">Load the data and plot the diagnostic</a></li><li><a href="#15">Prepare the model and fit it to the data</a></li><li><a href="#16">Automatic fit and final figure</a></li><li><a href="#17">Demo example for the grf model (Barker, 1988)</a></li><li><a href="#18">Load the data and plot the diagnostic</a></li><li><a href="#19">Prepare the model and check the preliminary fit to the data</a></li><li><a href="#20">Automatic fit and final figure</a></li></ul></div><p>The data set for this example comes from the following reference: G. Lods and P. Gouze (2004) WTFM, software for well test analysis in fractured media combining fractional flow with double porosity approaches. Computers and Geosciences. Vol 30. pp. 937-947 Example CS2 and CS3, page 943-944</p><p>This demo is composed by two example: grf_ds1.dat : time in s,  drawdown in m in the well Sha1B grf_ds2.dat : time in s,  drawdown in m in the well Sha1BT</p><h2 id="3">FIRST EXAMPLE</h2><p>Let us first load the data and plot them.</p><pre class="codeinput">clear; clf; clc
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo grf_dmo">
+Run in the Command Window</a></p>
 [t,s]=ldf(<span class="string">'grf_ds1.dat'</span>);
 diagnostic(t,s)
 </pre><img vspace="5" hspace="5" src="grf_dmo_01.png" alt=""> <p>We then define the values of the parameters that are required for the interpretation:</p><p>r   = 26.2 m rw  = rc = 0.1 m Q   = 0.02322 m3/s</p><p>We prepare the model and fit it to the data. A manual trial is required.</p><pre class="codeinput">grf_pre(26.2,0.1);
@@ -685,8 +690,8 @@ Iterations terminated: relative change in SSE less than OPTIONS.TolFun
 % This is a demonstration of the interpretation of a pumping test with the
 % Barker (1988) solution.
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
-
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 % The data set for this example comes from the following reference: 

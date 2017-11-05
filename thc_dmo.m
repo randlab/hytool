@@ -2,7 +2,8 @@
 % This is a demonstration of the interpretation of a pumping test in a 
 % confined aquifer with a boundary effect using the Theis (1941) solution.
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %% Load the data
 % The data set for this example has been provided by: 

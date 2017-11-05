@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Constant head test</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="jlq_dmo.m"><style type="text/css">
+      --><title>Constant head test</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-05"><meta name="DC.source" content="jlq_dmo.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Constant head test</h1><!--introduction--><p>This demonstrates the interpretation of discharge rate in the test well with the Jacob and Lohman (1952) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example comes from the following reference: Lohman (1965) Geology and artesian water supply of the Grand Junction area, Colorado: U.S. Geol. Survey Prof. Paper 451, 149p. Tables 6 and 7, well 28</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,q]=ldf(<span class="string">'jlq_ds1.dat'</span>);
+  </style></head><body><div class="content"><h1>Constant head test</h1><!--introduction--><p>This demonstrates the interpretation of discharge rate in the test well with the Jacob and Lohman (1952) solution</p><p>MIT License Copyright (c) 2017 Philippe Renard - University of Neuch&acirc;tel (CHYN)</p><!--/introduction--><p>The data set for this example comes from the following reference: Lohman (1965) Geology and artesian water supply of the Grand Junction area, Colorado: U.S. Geol. Survey Prof. Paper 451, 149p. Tables 6 and 7, well 28</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,q]=ldf(<span class="string">'jlq_ds1.dat'</span>);
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo jlq_dmo">
+Run in the Command Window</a></p>
 </pre><p>Once the data have been loaded , we can interpret the data. We do that as usually in two steps. First the parameters p of the model are estimated with the function jlq_gss. Then we find an optimum fit.</p><pre class="codeinput">p=jlq_gss(t,q);
 p=fit(<span class="string">'jlq'</span>,p,t,q);
 </pre><pre class="codeoutput"> 
@@ -100,7 +105,8 @@ Iterations terminated: relative norm of the current step is less than OPTIONS.To
 % This demonstrates the interpretation of discharge rate in the test well
 % with the Jacob and Lohman (1952) solution
 %
-% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 % The data set for this example comes from the following reference: 

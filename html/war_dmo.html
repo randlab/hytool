@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Pumping test in a double porosity aquifer</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="war_dmo.m"><style type="text/css">
+      --><title>Pumping test in a double porosity aquifer</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-05"><meta name="DC.source" content="war_dmo.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Pumping test in a double porosity aquifer</h1><!--introduction--><p>This demonstrates the interpretation of a pumping test with the Warren and Root (1965) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">General Information:</a></li></ul></div><p>The data set for this example comes from the following reference: Moench, A. 1984. Double porosity model for a fissured groundwater reservoir with fracture skin. Water Resources Research, 20(7), 831-846. Table 2, Page 838.</p><h2 id="2">General Information:</h2><p>Fissured tertiary volcanic rocks in the vicinity of the Yucca Mountain at Nevada Test Site. One pumped well UE-25b#1 and one observation well UE-25a#1. Pumping duration was about three days.</p><p>Let us first load the data and plot the diagnostic.</p><pre class="codeinput">clear
+  </style></head><body><div class="content"><h1>Pumping test in a double porosity aquifer</h1><!--introduction--><p>This demonstrates the interpretation of a pumping test with the Warren and Root (1965) solution</p><p>MIT License Copyright (c) 2017 Philippe Renard - University of Neuch&acirc;tel (CHYN)</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#2">General Information:</a></li></ul></div><p>The data set for this example comes from the following reference: Moench, A. 1984. Double porosity model for a fissured groundwater reservoir with fracture skin. Water Resources Research, 20(7), 831-846. Table 2, Page 838.</p><h2 id="2">General Information:</h2><p>Fissured tertiary volcanic rocks in the vicinity of the Yucca Mountain at Nevada Test Site. One pumped well UE-25b#1 and one observation well UE-25a#1. Pumping duration was about three days.</p><p>Let us first load the data and plot the diagnostic.</p><pre class="codeinput">clear
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo war_dmo">
+Run in the Command Window</a></p>
 [t,s]=ldf(<span class="string">'war_ds1.dat'</span>);
 diagnostic(t,s)
 </pre><img vspace="5" hspace="5" src="war_dmo_01.png" alt=""> <p>We then define the values of the field parameters that are required for the interpretation:</p><pre class="codeinput">e=400;                   <span class="comment">% Estimated reservoir thickness in m</span>
@@ -109,7 +114,8 @@ Iterations terminated: relative change in SSE less than OPTIONS.TolFun
 % This demonstrates the interpretation of a pumping test with the
 % Warren and Root (1965) solution
 %
-% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 % The data set for this example comes from the following reference: 

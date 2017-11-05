@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Boulton interpretation.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="blt_dmo.m"><style type="text/css">
+      --><title>Boulton interpretation.</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-05"><meta name="DC.source" content="blt_dmo.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Boulton interpretation.</h1><!--introduction--><p>This is a demonstration of the interpretation with Boulton (1963) model for unconfined aquifer of a pumping test in coastal aquifer</p><p>Copyright 1998-2007 - Philippe Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load the data</a></li><li><a href="#2">Model parameter identification</a></li><li><a href="#3">Reporting the results</a></li></ul></div><h2 id="1">Load the data</h2><p>The data set for this example has been provided by: G. de Marsily, cours DEA Paris 6, "Aquif&egrave;re c&ocirc;tier de Nefza, Tunisie". Piezometer A3</p><pre class="codeinput">clear; clf; clc
+  </style></head><body><div class="content"><h1>Boulton interpretation.</h1><!--introduction--><p>This is a demonstration of the interpretation with Boulton (1963) model for unconfined aquifer of a pumping test in coastal aquifer</p><p>MIT License Copyright (c) 2017 Philippe Renard - University of Neuch&acirc;tel (CHYN)</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load the data</a></li><li><a href="#2">Model parameter identification</a></li><li><a href="#3">Reporting the results</a></li></ul></div><h2 id="1">Load the data</h2><p>The data set for this example has been provided by: G. de Marsily, cours DEA Paris 6, "Aquif&egrave;re c&ocirc;tier de Nefza, Tunisie". Piezometer A3</p><pre class="codeinput">clear; clf; clc
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo blt_dmo">
+Run in the Command Window</a></p>
 
 [t,s]=ldf(<span class="string">'blt_ds1.dat'</span>);
 diagnostic(t,s)
@@ -100,7 +105,8 @@ blt_rpt(p,t,s,[q,r],<span class="string">'de Marsilly example'</span>)
 % This is a demonstration of the interpretation with Boulton (1963) model
 % for unconfined aquifer of a pumping test in coastal aquifer 
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %% Load the data
 % The data set for this example has been provided by: 

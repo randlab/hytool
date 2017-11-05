@@ -2,7 +2,8 @@
 % This demonstrates the interpretation of pumping test with the
 % Delay (2004) solution
 %
-% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 % The data set for this example comes from the following reference: 

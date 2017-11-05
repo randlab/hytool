@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Cooper-Jacob (1946) straight line method</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="jcb_dmo.m"><style type="text/css">
+      --><title>Cooper-Jacob (1946) straight line method</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-05"><meta name="DC.source" content="jcb_dmo.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Cooper-Jacob (1946) straight line method</h1><!--introduction--><p>This is a demonstration of the interpretation of a pumping test with the Cooper-Jacob (1946) solution. Note that it is not recommended to use the Cooper-Jacob solution as it is only an asymptotic approximation of the Theis (1935) solution for late time. The Theis solution should be prefered in general.</p><p>Copyright 1998-2007 - Philippe Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load the data</a></li></ul></div><h2 id="1">Load the data</h2><p>The data set for this example has been typed from: Table 5.1, page 172 in the following book: C.W. Fetter, 2001, Applied Hydrogeology, Fourth Edition. Prentice Hall, Upper Saddle River, 598 pp.</p><p>The interpetation is made in three steps: (1)load the data with the ldf command, (2) adjust a straight line to the late part of the data set (here we take the points from the 3rd to the last), (3) report the results.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'ths_ds1.dat'</span>);    <span class="comment">% load the time and drawdown</span>
+  </style></head><body><div class="content"><h1>Cooper-Jacob (1946) straight line method</h1><!--introduction--><p>This is a demonstration of the interpretation of a pumping test with the Cooper-Jacob (1946) solution. Note that it is not recommended to use the Cooper-Jacob solution as it is only an asymptotic approximation of the Theis (1935) solution for late time. The Theis solution should be prefered in general.</p><p>MIT License Copyright (c) 2017 Philippe Renard - University of Neuch&acirc;tel (CHYN)</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load the data</a></li></ul></div><h2 id="1">Load the data</h2><p>The data set for this example has been typed from: Table 5.1, page 172 in the following book: C.W. Fetter, 2001, Applied Hydrogeology, Fourth Edition. Prentice Hall, Upper Saddle River, 598 pp.</p><p>The interpetation is made in three steps: (1)load the data with the ldf command, (2) adjust a straight line to the late part of the data set (here we take the points from the 3rd to the last), (3) report the results.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'ths_ds1.dat'</span>);    <span class="comment">% load the time and drawdown</span>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo jcb_dmo">
+Run in the Command Window</a></p>
 p=jcb_gss(t(3:end),s(3:end));   <span class="comment">% linear fit of late data (3rd point to last)</span>
 q=0.013888;                     <span class="comment">% pumping rate in m3/s</span>
 r=250;                          <span class="comment">% distance to the well in  m</span>
@@ -80,7 +85,8 @@ jcb_rpt(p,t,s,[q,r],<span class="string">'Jacob interpretation of the Fetter dat
 % of the Theis (1935) solution for late time. The Theis solution should be
 % prefered in general.
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %% Load the data
 % The data set for this example has been typed from: 

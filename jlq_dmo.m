@@ -2,7 +2,8 @@
 % This demonstrates the interpretation of discharge rate in the test well
 % with the Jacob and Lohman (1952) solution
 %
-% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 % The data set for this example comes from the following reference: 

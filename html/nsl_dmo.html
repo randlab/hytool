@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Shut-in slug test (pulse)</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="nsl_dmo.m"><style type="text/css">
+      --><title>Shut-in slug test (pulse)</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-05"><meta name="DC.source" content="nsl_dmo.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Shut-in slug test (pulse)</h1><!--introduction--><p>This demonstrates the interpretation of a pulse test with the Neuzil (1982) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example comes from the following reference: Batu, V., Aquifer Hydraulics: A Comprehensive Guide to Hydrogeologic Data Analysis, John Wiley, New York, 1998. Example 13-2, Pages 689-692 Example adapted from Neuzil (1982)</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'nsl_ds1.dat'</span>);
+  </style></head><body><div class="content"><h1>Shut-in slug test (pulse)</h1><!--introduction--><p>This demonstrates the interpretation of a pulse test with the Neuzil (1982) solution</p><p>MIT License Copyright (c) 2017 Philippe Renard - University of Neuch&acirc;tel (CHYN)</p><!--/introduction--><p>The data set for this example comes from the following reference: Batu, V., Aquifer Hydraulics: A Comprehensive Guide to Hydrogeologic Data Analysis, John Wiley, New York, 1998. Example 13-2, Pages 689-692 Example adapted from Neuzil (1982)</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'nsl_ds1.dat'</span>);
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo nsl_dmo">
+Run in the Command Window</a></p>
 clf
 plot(t,s)
 </pre><img vspace="5" hspace="5" src="nsl_dmo_01.png" alt=""> <p>We then define the values of the parameters that are required for the interpretation:</p><p>rw   represents the radius of the well Ceff the effective compressibility Vs   the volume of the tested section</p><pre class="codeinput">rw=0.067;                    <span class="comment">% Radius of the well in m</span>
@@ -99,7 +104,8 @@ nsl_rpt([cd,t0],t,s,[Ceff,Vs,rw],<span class="string">'Pierre Shale example - ac
 % This demonstrates the interpretation of a pulse test with the
 % Neuzil (1982) solution
 %
-% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 % The data set for this example comes from the following reference: 

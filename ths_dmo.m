@@ -2,7 +2,8 @@
 % This is a demonstration of the interpretation of a pumping test with the
 % Theis (1935) solution.
 %
-% Copyright 1998-2007 - Philippe Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %% Load the data
 % The data set for this example has been typed from: 
@@ -34,8 +35,9 @@ title('The Fetter data set')
 % In order to display the diagnostic plot of the data, we use the 
 % function diagnostic(t,s) provided by hytool.
 
-diagnostic(t,s)
+diagnostic(t,s,20,'d')
 
+diagnostic(t,s)
 % The plot shows a typical 2D infinite acting radial flow.
 % The derivative stabilizes at late time and the derivative is larger than
 % the drawdown at early time. 

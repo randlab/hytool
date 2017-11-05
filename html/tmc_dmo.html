@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Theis solution with a constant head boundary for Multiple rate tests</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-06-28"><meta name="DC.source" content="tmc_dmo.m"><style type="text/css">
+      --><title>Theis solution with a constant head boundary for Multiple rate tests</title><meta name="generator" content="MATLAB 9.2"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-11-05"><meta name="DC.source" content="tmc_dmo.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,12 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Theis solution with a constant head boundary for Multiple rate tests</h1><!--introduction--><p>This demonstrates the interpretation of the drawdown at time t for multiple rate tests with accounting for a constant head boundary with the Theis (1935) solution</p><p>Copyright 1998-2007 - Ph. Renard &amp; Co. - GNU GENERAL PUBLIC LICENSE</p><!--/introduction--><p>The data set for this example is synthetic. It has been created with by using the function tmr_dim plus a random noise, and saved in a file. s = tmc_dim([1e2,20,300],t)+rand(80,1)*0.02-0.01;</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'tmc_ds1.dat'</span>);
+  </style></head><body><div class="content"><h1>Theis solution with a constant head boundary for Multiple rate tests</h1><!--introduction--><p>This demonstrates the interpretation of the drawdown at time t for multiple rate tests with accounting for a constant head boundary with the Theis (1935) solution</p><p>MIT License Copyright (c) 2017 Philippe Renard - University of Neuch&acirc;tel (CHYN)</p><!--/introduction--><p>The data set for this example is synthetic. It has been created with by using the function tmr_dim plus a random noise, and saved in a file. s = tmc_dim([1e2,20,300],t)+rand(80,1)*0.02-0.01;</p><p>Let us first load the data and plot them.</p><pre class="codeinput">[t,s]=ldf(<span class="string">'tmc_ds1.dat'</span>);
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo tmc_dmo">
+Run in the Command Window</a></p>
 </pre><p>We then define the values of the parameters that are required for the interpretation:</p><p>The piezometer is located at 20m from the pumping well. Three rate tests [t(min);q(m3/d)]:[30,500;80,100;130,800];</p><pre class="codeinput">q=[30*60,500/24/60/60;80*60,100/24/60/60;130*60,800/24/60/60];
 tmc_pre(q);
 </pre><p>Once the data have been loaded and the parameter defined, we can interpret the data. We do that as usually in two steps. First the parameters p of the model are estimated with the function tmc_gss. Then we an optimum fit.</p><pre class="codeinput">p=tmc_gss(t,s);
@@ -319,7 +324,8 @@ Iterations terminated: relative change in SSE less than OPTIONS.TolFun
 % multiple rate tests with accounting for a constant head boundary
 % with the Theis (1935) solution
 %
-% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 % The data set for this example is synthetic. It has been created with 

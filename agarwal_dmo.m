@@ -2,7 +2,8 @@
 % This demonstrates the interpretation of a recovery test after a constant
 % rate or variable rate test.
 %
-% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 %

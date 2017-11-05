@@ -3,7 +3,8 @@
 % multiple rate tests with accounting for a constant head boundary
 % with the Theis (1935) solution
 %
-% Copyright 1998-2007 - Ph. Renard & Co. - GNU GENERAL PUBLIC LICENSE
+% MIT License
+% Copyright (c) 2017 Philippe Renard - University of Neuchâtel (CHYN)
 
 %%
 % The data set for this example is synthetic. It has been created with 
