@@ -19,7 +19,7 @@ bibliography: paper.bib
 
 # Summary
 
-Hydraulic tests are hydrogeological field experiments used to identify aquifer types and physical parameters. They consist in applying a hydraulic perturbation such as pumping groundwater in a well and observing the variations of the groundwater levels in the same well or in other observation wells. Many types of tests involving different types of hydraulic perturbations, and many analytical solutions have been developed in the past to interpret such experiments [@raghavan1993] [@renard2006].
+Hydraulic tests are hydrogeological field experiments used to identify aquifer types and physical parameters. They consist of applying a hydraulic perturbation such as pumping groundwater in a well and observing the variations of the groundwater levels in the same well or in other observation wells. Many types of tests, involving different types of hydraulic perturbations, and many analytical solutions, have been developed in the past to interpret such experiments [@raghavan1993] [@renard2006].
 
 Hytool is a Matlab toolbox that provides a catalog of classical analytical solutions for interpreting hydraulic tests. It includes models corresponding to different flow conditions and aquifer types (confined aquifers, unconfined aquifers, double-porosity media, general radial flow, single fracture, fractal media). Some solutions for multiple pumping rates, constant head test, or slug tests are available as well as bounded aquifers.
 
