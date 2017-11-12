@@ -1,5 +1,5 @@
 % Interpretation of Hydraulic Tests
-% Version 2.05 27-06-2017
+% Version 2.06 12-nov-2017
 %
 % by Philippe Renard and Co.
 %
