@@ -5,7 +5,6 @@ tags:
   - pumping tests
   - well tests
   - hydrogeology
-
 authors:
  - name: Philippe Renard
    orcid: 0000-0003-4504-435X
@@ -27,10 +26,10 @@ The structure of the code is modular and allows a user to easily add new solutio
 
 In addition to the analytical solution, hytool contains a set of functions to help the user load and manipulate the hydraulic test data, construct diagnostic plots [@renard2009], fit automatically a model, and report the results as illustrated in the following figure. In this example, a data set (measurements of groundwater drawdown as a function of time during a constant rate pumping experiment) is interpreted using the Theis analytical model. The graph shows the superposition of the data and the model and includes the logarithmic derivative of the data and model. Below the graph, hytool provides information about the parameters that were obtained by the least-square procedure, the quality of the fit and the values of the hydraulic properties of the aquifer (transmissivity and specific storage).
 
-![Example of Data interpretation with Hytool](https://github.com/UniNE-CHYN/hytool/blob/master/html/ths_dmo_09.png)
+![Example of Data interpretation with Hytool](https://raw.githubusercontent.com/UniNE-CHYN/hytool/master/html/ths_dmo_09.png)
 
 The user documentation is included within the toolbox and available as internal help within Matlab. The help contains a description of each individual function plus a series of examples including data sets that are used to demonstrate how hytool can be used in practice.
 
-Hytool is employed for teaching purposes in the University of Neuchâtel. It is also  used in several research projects for determining the hydraulic properties of porous or fractured [@mejias2009]  aquifers. This often constitutes a preliminary step for many hydrogeological applications. Hytool was for example used in the context of estimating groundwater inflows in tunnels [@dematteis2003] or groundwater modeling study [@alcolea2009]. Recently, Hytool was used in a research project devoted to the development of a new geophysical monitoring method [@desroches2016monitoring]. 
+Hytool is employed for teaching purposes in the University of Neuchâtel. It is also  used in several research projects for determining the hydraulic properties of porous or fractured [@mejias2009]  aquifers. This often constitutes a preliminary step for many hydrogeological applications. Hytool was for example used in the context of estimating groundwater inflows in tunnels [@dematteis2003] or groundwater modeling study [@alcolea2009]. Recently, Hytool was used in a research project devoted to the development of a new geophysical monitoring method [@desroches2016monitoring].
 
 # References
