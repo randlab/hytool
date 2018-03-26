@@ -18,17 +18,19 @@ end
 
 figure(1)
 clf
-t=logspace(-1,6)*rd.^2;
+t=logspace(-1,4)*rd.^2;
 clf
-for n=1:.25:3
+for n=1:.5:3
     s=grf_dls([n,rd],t);
     [x,d]=ldiff(t,s);
-    loglog(t,s,'-')
+    loglog(t,s,'-','LineWidth',2)
     hold on
 end
-title(sprintf('GRF model for r_D=%g',rd))
-xlabel('t_D')
-ylabel('s_D')
+legend({'n=1','n=1.5','n=2','n=2.5','n=3'},...
+    'FontSize',16,'Location','NorthWest')
+title(sprintf('GRF model for r_D = %g',rd),'FontSize',16)
+xlabel('t_D','FontSize',16)
+ylabel('s_D','FontSize',16)
 
 figure(2)
 clf
@@ -37,7 +39,8 @@ for i=1:4
     subplot(2,2,i)
     s=grf_dls([n(i),rd],t);
     [x,y]=ldiff(t,s);
-    loglog(t,s,'-',x,y,'-.')
+    loglog(t,s,'-','LineWidth',2); hold on
+    loglog(x,y,'-.','LineWidth',2)
     xlabel('t_D')
     ylabel('s_D')
     title(sprintf('r_D=%g, n=%g',rd,n(i)))
@@ -48,14 +51,18 @@ end
 
 figure(3)
 clf
+
+t=logspace(-1,6)*rd.^2;
 subplot(1,2,1)
 s=grf_dls([1.5,rd],t);
 [x,y]=ldiff(t,s);
 loglog(t,s,'k-','LineWidth',1.5)
+grid on
 hold on
 loglog(x,y,'k-.','LineWidth',1.5)
-yticks([])
-xticks([])
+grid on
+%yticks([])
+%xticks([])
 axis([1e-1 1e6 1e-2 1e2])
 
 
@@ -64,8 +71,9 @@ semilogx(t,s,'k-','LineWidth',1.5)
 hold on
 plot(x,y,'k-.','LineWidth',1.5)
 axis([1e-1 1e6 1e-2 70])
-yticks([])
-xticks([])
+grid on
+%yticks([])
+%xticks([])
 
 
 
