@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>deg_fit :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>deg_fit</h1>
+<p></p>
+ 
+<h2>Syntax</h2>
+<pre>[T,c] = deg_fit( Q, rfit, sfit )          
+    
+       Q      = pumping rate [L^3/T]
+       rfit   = vector of distances to pumping well [L]
+       sfit   = vector of steady drawdown values [L] 
+       T      = optimum transmissivity [L^/T]
+       c      = optimum leaky parameter [T]
+ 
+</pre>
+<h2>Description</h2>
+<pre>The de Glee method is based on steady state drawdown 
+    observations for at least two observation points. It can be applied for 
+    half-confined aquifers. Output parameters are the transmissivity and 
+    the resistance of the half-permeable layer. 
+    
+    Distances of observation points and steady drawdowns are read from file.
+    The function optimizes the value of the model parameters so that
+    the model fits the observations. The fit is obtained by an iterative
+    non linear least square procedure. The initial guess for transmissivity
+    is taken from the confined case. 
+ 
+    T indicates time unit, L space unit; here: T = second, L = meter
+ 
+  Ref.:
+  https://www.researchgate.net/publication/303238126_Pumping_Test_Evaluation_
+ _using_the_deGlee_Equation_for_Steady-state_Drawdown_in_Half-Confined_Aquifers 
+ %
+    Published output in the Help browser
+       showdemo deg_fit
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>

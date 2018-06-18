@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>thm_fit :: Functions (Hytool Toolbox)</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="hytool.css">
+</head>
+
+<body>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Function Reference</b></td></tr></table>
+
+<h1>thm_fit</h1>
+<p></p>
+ 
+<h2>Syntax</h2>
+<pre>p = thm_fit( Q, h0, r, s )          
+    
+       Q      = pumping rate
+       h0     = initial thickness of unconfined aquifer; &lt;=0: confined 
+       r,s    = data set
+   
+       p      = optimum parameter
+ 
+</pre>
+<h2>Description</h2>
+<pre>The Thiem method is based on steady state drawdown observations
+    in at least two observation points. It can be applied for confined and 
+    unconfined aquifers. Only in the unconfined case the initial aquifer thickness 
+    is required. The confined case is indicated by setting the h0 input value &lt;= 0.
+    Output parameter in the unconfined case is the hydraulic conductivity (m/s),
+    in the confined case the transmissivity (m2/s). 
+    
+    Distances of observation points and steady drawdowns are read from file.
+    The function optimizes the value of the model parameter so that
+    the model fits the observations. The fit is obtained by the analytical 
+    solution of the logarithmic least square procedure. 
+ 
+  Ref.: https://www.researchgate.net/publication/299624782_Pumping_Test_Evaluation_
+  using_Thiem_Equation_for_Steady-_state_Drawdown_in_Confined_and_Unconfined_Aquifers
+ %
+    Published output in the Help browser
+       showdemo thm_fit
+
+</pre>
+
+<table width="100%" border=0 cellpadding=0 cellspacing=0>
+<tr><td valign=baseline bgcolor="#e7ebf7">Hytool</td></tr></table>
+<p>&copy; 1998-2017 Philppe Renard and Co.
+<tt class="minicdot">&#149;</tt> <a href="license.txt">Terms of Use</a>
+<tt class="minicdot">&#149;</tt> <a href="acknowledgments.html">Acknowledgments</a></p>
+</body></html>
