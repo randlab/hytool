@@ -1,0 +1,227 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Data set</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-06-17"><meta name="DC.source" content="deg_dmo.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Data set</h1><!--introduction--><p>The data set for this example comes from the following reference: Kruseman &amp; de Ridder (1994), Analysis and Evaluation of Pumping Test Data. International Institute for Land Reclamation and Improvement, Wageningen. The Netherlands. 377 pp. Data set from table 4.1 p77</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#3">Use of the deg_fit function</a></li></ul></div><p>General Information: Localisation: Test performed in 'Dalem' site (de Ridder 1961).</p><p>The fitted de Glee method requires to know the pumping rate and the drawdown in at least two observation wells located at different distances from the pumping well.</p><pre class="codeinput">q=0.0088;                             <span class="comment">% well discharge in m3/s</span>
+<table width="100%" border=0 cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7">
+<b>HYTOOL Demo</b></td></tr></table>
+<p><a href="matlab:echodemo deg_dmo">
+Run in the Command Window</a></p>
+<span class="comment">% r = [10;30;60;90;120];              % observation well distances in m</span>
+<span class="comment">% s = [.31;.235;.17;.147;.132];       % drawdown in m</span>
+[r,s] = ldf(<span class="string">'deg_ds1.dat'</span>);
+</pre><h2>Use of the deg_fit function<a name="3"></a></h2><p>We can then use the deg_fit function (Holzbecher) and compute transmissivity &amp; resistence : T = 1.9e-2 m2/s, c = 1.8e7 s</p><pre class="codeinput">[T,c] = deg_fit (q,r',s')
+</pre><pre class="codeoutput"> 
+ Iteration   Func-count     min f(x)         Procedure
+     0            1         0.015997         
+     1            3        0.0107119         initial simplex
+     2            5       0.00723583         expand
+     3            7       0.00201204         expand
+     4            9       0.00118635         reflect
+     5           10       0.00118635         reflect
+     6           12       0.00118635         contract inside
+     7           14       0.00113312         contract inside
+     8           16       0.00104555         reflect
+     9           18       0.00103578         contract inside
+    10           20      0.000982262         reflect
+    11           22      0.000982262         contract inside
+    12           24       0.00088682         expand
+    13           26      0.000815172         expand
+    14           28      0.000560313         expand
+    15           30      0.000258322         expand
+    16           32      0.000258322         contract inside
+    17           34      0.000258322         contract inside
+    18           36      0.000177794         reflect
+    19           38      0.000177794         contract inside
+    20           40      0.000177794         contract inside
+    21           42      0.000173307         reflect
+    22           44      0.000137083         reflect
+    23           45      0.000137083         reflect
+    24           46      0.000137083         reflect
+    25           48      0.000121516         contract inside
+    26           50      0.000121516         contract inside
+    27           52      0.000120109         reflect
+    28           54      0.000119025         contract inside
+    29           56      0.000118817         contract outside
+    30           58      0.000118348         contract inside
+    31           60      0.000118099         contract inside
+    32           61      0.000118099         reflect
+    33           63      0.000118045         contract inside
+    34           65      0.000118045         contract inside
+    35           67      0.000118014         contract inside
+    36           69      0.000118014         contract inside
+    37           71      0.000118011         contract inside
+    38           73      0.000118007         contract outside
+    39           75      0.000118006         contract inside
+    40           77      0.000118005         contract inside
+    41           79      0.000118005         contract outside
+    42           81      0.000118004         contract inside
+    43           83      0.000118004         contract inside
+    44           84      0.000118004         reflect
+    45           86      0.000118004         contract inside
+    46           88      0.000118004         contract outside
+    47           90      0.000118004         contract inside
+    48           92      0.000118004         contract inside
+    49           94      0.000118004         contract inside
+    50           96      0.000118004         contract outside
+    51           98      0.000118004         contract inside
+    52          100      0.000118004         contract outside
+    53          102      0.000118004         contract inside
+    54          104      0.000118004         contract inside
+    55          106      0.000118004         contract outside
+    56          108      0.000118004         contract inside
+    57          110      0.000118004         contract inside
+    58          112      0.000118004         contract inside
+    59          114      0.000118004         contract inside
+    60          116      0.000118004         contract inside
+    61          118      0.000118004         contract inside
+    62          120      0.000118004         contract outside
+    63          122      0.000118004         contract inside
+    64          124      0.000118004         contract outside
+    65          126      0.000118004         contract inside
+    66          128      0.000118004         contract inside
+    67          130      0.000118004         contract inside
+    68          132      0.000118004         contract inside
+    69          134      0.000118004         reflect
+    70          136      0.000118004         contract inside
+    71          138      0.000118004         contract inside
+    72          140      0.000118004         contract inside
+    73          142      0.000118004         contract inside
+    74          144      0.000118004         contract inside
+    75          146      0.000118004         reflect
+    76          148      0.000118004         contract inside
+    77          152      0.000118004         shrink
+    78          156      0.000118004         shrink
+    79          157      0.000118004         reflect
+    80          161      0.000118004         shrink
+    81          162      0.000118004         reflect
+    82          166      0.000118004         shrink
+    83          167      0.000118004         reflect
+    84          168      0.000118004         reflect
+    85          169      0.000118004         reflect
+    86          171      0.000118004         reflect
+    87          175      0.000118004         shrink
+    88          177      0.000118004         contract inside
+    89          178      0.000118004         reflect
+    90          180      0.000118004         contract inside
+    91          184      0.000118004         shrink
+    92          186      0.000118004         contract outside
+    93          190      0.000118004         shrink
+    94          194      0.000118004         shrink
+    95          198      0.000118004         shrink
+    96          199      0.000118004         reflect
+    97          203      0.000118004         shrink
+ 
+Optimization terminated:
+ the current x satisfies the termination criteria using OPTIONS.TolX of 1.000000e-04 
+ and F(X) satisfies the convergence criteria using OPTIONS.TolFun of 1.000000e-11 
+
+
+T =
+
+    0.0188
+
+
+c =
+
+   1.7528e+07
+
+</pre><img vspace="5" hspace="5" src="deg_dmo_01.png" style="width:560px;height:420px;" alt=""> <p>The result found by Kruseman &amp; de Ridder was: T = 2.46e-2 m2/s, c = 4.9e7 s</p><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Data set
+% The data set for this example comes from the following reference: 
+% Kruseman & de Ridder (1994), Analysis and Evaluation of Pumping Test
+% Data. International Institute for Land Reclamation and Improvement,
+% Wageningen. The Netherlands. 377 pp.
+% Data set from table 4.1 p77
+
+%%
+% General Information:
+% Localisation: Test performed in 'Dalem' site (de Ridder 1961).
+
+%% 
+% The fitted de Glee method requires to know the pumping rate and the drawdown in
+% at least two observation wells located at different distances from the pumping
+% well. 
+
+q=0.0088;                             % well discharge in m3/s
+% r = [10;30;60;90;120];              % observation well distances in m
+% s = [.31;.235;.17;.147;.132];       % drawdown in m
+[r,s] = ldf('deg_ds1.dat');
+
+
+%% Use of the deg_fit function
+% We can then use the deg_fit function (Holzbecher) and compute transmissivity & resistence : 
+% T = 1.9e-2 m2/s, c = 1.8e7 s 
+
+[T,c] = deg_fit (q,r',s')
+
+%%
+% The result found by Kruseman & de Ridder was: T = 2.46e-2 m2/s, c = 4.9e7 s
+##### SOURCE END #####
+--></body></html>
