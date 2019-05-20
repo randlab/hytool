@@ -15,4 +15,4 @@ A rather complete version of Hytool in R is available. It is developped by Fran√
 
 # Python version
 
-Some of the functionalities of hytool are also available in the hypy https://github.com/UniNE-CHYN/hypy  Python module that was written by Loic Pianaro for his Bachelor's thesis at the University of Neuchatel. The module is not yet complete but offers the basic functionalities of hytool. If interested, you are welcome to participate in the extension or development of this open source project.
+Some of the functionalities of hytool are also available in the hypy https://github.com/UniNE-CHYN/hypy  Python module.
