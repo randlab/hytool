@@ -1,4 +1,7 @@
 # hytool
+
+[![View hytool on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://ch.mathworks.com/matlabcentral/fileexchange/74747-hytool)
+
 Hytool is a matlab toolbox for the interpretation of hydraulic tests in wells. The toolbox contains analytical solutions used to describe groundwater flow around wells, and functions for importing, displaying, and fitting a model to the data. 
 
 The [Wiki page](https://github.com/UniNE-CHYN/hytool/wiki)  of this repository explains how to install hytool on your machine.
